@@ -20,6 +20,31 @@ public class Biblioteca {
         listaLibros = new LinkedList<>();
     }
 
+    public void agregarPrestamo(Prestamo prestamo){
+        if (verificarPrestamo(prestamo.getCodigo())) {
+            listaPrestamos.add(prestamo);
+            prestamo.getBibliotecario().incrementarCantidadPrestados();
+        }
+    }
+
+    public boolean verificarPrestamo(String codigo){
+        boolean decision = true;
+        for(Prestamo prestamoTemporal: listaPrestamos){
+            if (prestamoTemporal.getCodigo().equals(codigo)) {
+                decision = false;
+            }
+        }
+        return decision;
+    }
+    
+    public void eliminarPrestamo(String codigo){
+        for(Prestamo prestamoTemporal: listaPrestamos){
+            if (prestamoTemporal.getCodigo().equals(codigo)) {
+                listaPrestamos.remove(prestamoTemporal);
+            }
+        }
+    }
+
     public String getNombre() {
         return nombre;
     }

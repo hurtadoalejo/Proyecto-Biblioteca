@@ -23,6 +23,13 @@ public class Bibliotecario {
         this.cantidadPrestamos = 0;
     }
     
+    public void incrementarCantidadPrestados(){
+        cantidadPrestamos ++;
+    }
+    public void decrementarCantidadPrestados(){
+        cantidadPrestamos --;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -61,5 +68,8 @@ public class Bibliotecario {
         this.cantidadPrestamos = cantidadPrestamos;
     }
 
-    
+    public String toString() {
+        return "Bibliotecario [nombre=" + nombre + ", cedula=" + cedula + ", telefono=" + telefono + ", correo="
+                + correo + ", salario=" + salario + ", cantidadPrestamos=" + cantidadPrestamos + "]";
+    }  
 }
