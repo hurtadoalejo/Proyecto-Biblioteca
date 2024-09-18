@@ -20,6 +20,35 @@ public class Biblioteca {
         listaLibros = new LinkedList<>();
     }
 
+    public void mostrarDatosLibro(String codigo){
+        for(Libro libroTemporal : listaLibros){
+            if (libroTemporal.getCodigo().equals(codigo)) {
+                System.out.println(libroTemporal.toString());
+            }
+        }
+    }
+
+    public int contarCantidadPrestamosLibro(String titulo){
+        int conteo = 0;
+        for(Prestamo prestamoTemporal : listaPrestamos){
+            if (verificarLibroPrestamo(prestamoTemporal.getListaDetallePrestamos(), titulo)){
+                conteo ++;
+            }
+        }
+        return conteo;
+    }
+
+    public boolean verificarLibroPrestamo(List<DetallePrestamo> listaDetallePrestamos, String titulo){
+        boolean decision = false;
+        for(DetallePrestamo detallePrestamoTemporal : listaDetallePrestamos){
+            if (detallePrestamoTemporal.getLibro().getTitulo().equals(nombre)) {
+                decision = true;
+                break;
+            }
+        }
+        return decision;
+    }
+
     public void agregarPrestamo(Prestamo prestamo){
         if (verificarPrestamo(prestamo.getCodigo())) {
             listaPrestamos.add(prestamo);
@@ -45,6 +74,8 @@ public class Biblioteca {
             }
         }
     }
+
+
 
     public String getNombre() {
         return nombre;
