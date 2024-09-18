@@ -42,5 +42,25 @@ public class Libro {
         return unidadesDisponibles;
     }
 
-    
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
+    }
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+    public void setUnidadesDisponibles(int unidadesDisponibles) {
+        this.unidadesDisponibles = unidadesDisponibles;
+    }
 }

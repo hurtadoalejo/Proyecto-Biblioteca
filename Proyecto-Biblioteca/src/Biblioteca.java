@@ -23,7 +23,8 @@ public class Biblioteca {
     public void agregarPrestamo(Prestamo prestamo){
         if (verificarPrestamo(prestamo.getCodigo())) {
             listaPrestamos.add(prestamo);
-            prestamo.getBibliotecario().incrementarCantidadPrestados();
+            int cantidadPrestamos = prestamo.getBibliotecario().getCantidadPrestamos();
+            prestamo.getBibliotecario().setCantidadPrestamos(cantidadPrestamos++);;
         }
     }
 

@@ -22,13 +22,6 @@ public class Bibliotecario {
         this.salario = salarioBase;
         this.cantidadPrestamos = 0;
     }
-    
-    public void incrementarCantidadPrestados(){
-        cantidadPrestamos ++;
-    }
-    public void decrementarCantidadPrestados(){
-        cantidadPrestamos --;
-    }
 
     public String getNombre() {
         return nombre;
