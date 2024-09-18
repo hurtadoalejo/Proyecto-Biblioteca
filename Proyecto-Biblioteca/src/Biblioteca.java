@@ -20,33 +20,70 @@ public class Biblioteca {
         listaLibros = new LinkedList<>();
     }
 
-    public void mostrarDatosLibro(String codigo){
+    public void agregarLibro(Libro libro){
+        if (verificarLibro(libro.getCodigo(), libro.getIsbn())){
+            listaLibros.add(libro);
+        }
+    }
+    public boolean verificarLibro(String codigo, String isbn){
+        boolean decision = true;
         for(Libro libroTemporal : listaLibros){
-            if (libroTemporal.getCodigo().equals(codigo)) {
-                System.out.println(libroTemporal.toString());
-            }
-        }
-    }
-
-    public int contarCantidadPrestamosLibro(String titulo){
-        int conteo = 0;
-        for(Prestamo prestamoTemporal : listaPrestamos){
-            if (verificarLibroPrestamo(prestamoTemporal.getListaDetallePrestamos(), titulo)){
-                conteo ++;
-            }
-        }
-        return conteo;
-    }
-
-    public boolean verificarLibroPrestamo(List<DetallePrestamo> listaDetallePrestamos, String titulo){
-        boolean decision = false;
-        for(DetallePrestamo detallePrestamoTemporal : listaDetallePrestamos){
-            if (detallePrestamoTemporal.getLibro().getTitulo().equals(nombre)) {
-                decision = true;
-                break;
+            if (libroTemporal.getCodigo().equals(codigo) || libroTemporal.getIsbn().equals(isbn)) {
+                decision = false;
             }
         }
         return decision;
+    }
+    public void eliminarLibro(String codigo){
+        for(Libro libroTemporal : listaLibros){
+            if (libroTemporal.getCodigo().equals(codigo)) {
+                listaLibros.remove(libroTemporal);
+            }
+        }
+    }
+
+    public void agregarEstudiante(Estudiante estudiante){
+        if (verificarEstudiante(estudiante.getCedula())) {
+            listaEstudiantes.add(estudiante);
+        }
+    }
+    public boolean verificarEstudiante(String cedula){
+        boolean decision = true;
+        for(Estudiante estudianteTemporal: listaEstudiantes){
+            if (estudianteTemporal.getCedula().equals(cedula)) {
+                decision = false;
+            }
+        }
+        return decision;
+    }
+    public void eliminarEstudiante(String cedula){
+        for(Estudiante estudianteTemporal: listaEstudiantes){
+            if (estudianteTemporal.getCedula().equals(cedula)) {
+                listaEstudiantes.remove(estudianteTemporal);
+            }
+        }
+    }
+
+    public void agregarBibliotecario(Bibliotecario bibliotecario){
+        if (verificarBibliotecario(bibliotecario.getCedula())) {
+            listaBibliotecarios.add(bibliotecario);
+        }
+    }
+    public boolean verificarBibliotecario(String cedula){
+        boolean decision = true;
+        for(Bibliotecario bibliotecarioTemporal : listaBibliotecarios){
+            if (bibliotecarioTemporal.getCedula().equals(cedula)) {
+                decision = false;
+            }
+        }
+        return decision;
+    }
+    public void eliminarBibliotecario(String cedula){
+        for(Bibliotecario bibliotecarioTemporal : listaBibliotecarios){
+            if (bibliotecarioTemporal.getCedula().equals(cedula)) {
+                listaBibliotecarios.remove(bibliotecarioTemporal);
+            }
+        }
     }
 
     public void agregarPrestamo(Prestamo prestamo){
@@ -75,7 +112,35 @@ public class Biblioteca {
         }
     }
 
+    public void mostrarDatosLibro(String codigo){
+        for(Libro libroTemporal : listaLibros){
+            if (libroTemporal.getCodigo().equals(codigo)) {
+                System.out.println(libroTemporal.toString());
+                break;
+            }
+        }
+    }
 
+    public int contarCantidadPrestamosLibro(String titulo){
+        int conteo = 0;
+        for(Prestamo prestamoTemporal : listaPrestamos){
+            if (verificarLibroPrestamo(prestamoTemporal.getListaDetallePrestamos(), titulo)){
+                conteo ++;
+            }
+        }
+        return conteo;
+    }
+
+    public boolean verificarLibroPrestamo(List<DetallePrestamo> listaDetallePrestamos, String titulo){
+        boolean decision = false;
+        for(DetallePrestamo detallePrestamoTemporal : listaDetallePrestamos){
+            if (detallePrestamoTemporal.getLibro().getTitulo().equals(titulo)) {
+                decision = true;
+                break;
+            }
+        }
+        return decision;
+    }
 
     public String getNombre() {
         return nombre;

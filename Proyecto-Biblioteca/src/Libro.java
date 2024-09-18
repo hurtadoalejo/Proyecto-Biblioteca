@@ -9,8 +9,7 @@ public class Libro {
     private LocalDate fecha;
     private int unidadesDisponibles;
 
-    public Libro(String codigo, String isbn, String autor, String titulo, String editorial, int anio, int mes, int dia,
-        int unidadesDisponibles) {
+    public Libro(String codigo, String isbn, String autor, String titulo, String editorial, int anio, int mes, int dia, int unidadesDisponibles) {
         this.codigo = codigo;
         this.isbn = isbn;
         this.autor = autor;
@@ -63,4 +62,9 @@ public class Libro {
     public void setUnidadesDisponibles(int unidadesDisponibles) {
         this.unidadesDisponibles = unidadesDisponibles;
     }
+
+    public String toString() {
+        return "Libro [codigo=" + codigo + ", isbn=" + isbn + ", autor=" + autor + ", titulo=" + titulo + ", editorial="
+                + editorial + ", fecha=" + fecha + ", unidadesDisponibles=" + unidadesDisponibles + "]";
+    }    
 }
