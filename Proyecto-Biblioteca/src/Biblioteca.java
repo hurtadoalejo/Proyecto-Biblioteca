@@ -143,7 +143,7 @@ public class Biblioteca {
     }
 
     public void reemplazarLibro(Libro libroViejo, Libro libroNuevo){
-        if (verificarLibro(libroNuevo.getCodigo(), libroNuevo.getIsbn())) {
+        if (verificarReemplazarLibro(libroNuevo.getCodigo(), libroNuevo.getIsbn())) {
             for(int a = 0; a < listaLibros.size(); a++){
                 if (listaLibros.get(a).getCodigo().equals(libroViejo.getCodigo())) {
                     listaLibros.set(a, libroNuevo);
@@ -151,6 +151,16 @@ public class Biblioteca {
                 }
             }
         }
+    }
+    public boolean verificarReemplazarLibro(String codigo, String isbn){
+        boolean decision = false;
+        for(Libro libroTemporal : listaLibros){
+            if (libroTemporal.getCodigo().equals(codigo) && !libroTemporal.getIsbn().equals(isbn)) {
+                decision = true;
+                break;
+            }
+        }
+        return decision;
     }
 
     public String getNombre() {

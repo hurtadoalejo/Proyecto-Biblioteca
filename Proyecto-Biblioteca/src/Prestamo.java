@@ -22,12 +22,23 @@ public class Prestamo {
     public void agregarDetallePrestamo(DetallePrestamo detallePrestamo){
         Libro libro = detallePrestamo.getLibro();
         int cantidad = detallePrestamo.getCantidad();
+        boolean aumentar = true;
         if (verificarDetallePrestamo(cantidad, libro)) {
-            listaDetallePrestamos.add(detallePrestamo);
+            for(DetallePrestamo detallePrestamoTemporal : listaDetallePrestamos){
+                if (detallePrestamoTemporal.getLibro().getCodigo().equals(libro.getCodigo())) {
+                    detallePrestamoTemporal.setCantidad(detallePrestamoTemporal.getCantidad()+cantidad);
+                    aumentar = false;
+                    break;
+                }
+            }
+            if (aumentar) {
+                listaDetallePrestamos.add(detallePrestamo);
+                bibliotecario.setCantidadPrestamos(bibliotecario.getCantidadPrestamos()+1);
+            }
             libro.setUnidadesDisponibles(libro.getUnidadesDisponibles()-cantidad);
-            bibliotecario.setCantidadPrestamos(bibliotecario.getCantidadPrestamos()+1);
         }
     }
+    
     public boolean verificarDetallePrestamo(int cantidad, Libro libro){
         boolean decision = true;
         if (cantidad > libro.getUnidadesDisponibles()) {
