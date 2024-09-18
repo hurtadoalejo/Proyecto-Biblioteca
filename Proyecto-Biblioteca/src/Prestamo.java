@@ -7,9 +7,9 @@ public class Prestamo {
     private Bibliotecario bibliotecario;
     private Estudiante estudiante;
     private LocalDate fechaPrestamo;
-    private List<DetallePrestamo> listaDetallePrestamos;
     private double costoPrestamoDia;
-
+    private List<DetallePrestamo> listaDetallePrestamos;
+    
     public Prestamo(String codigo, Bibliotecario bibliotecario, Estudiante estudiante, int anio, int mes, int dia, int costoPrestamoDia) {
         this.codigo = codigo;
         this.bibliotecario = bibliotecario;
@@ -23,7 +23,9 @@ public class Prestamo {
         Libro libro = detallePrestamo.getLibro();
         int cantidad = detallePrestamo.getCantidad();
         if (verificarDetallePrestamo(cantidad, libro)) {
+            listaDetallePrestamos.add(detallePrestamo);
             libro.setUnidadesDisponibles(libro.getUnidadesDisponibles()-cantidad);
+            bibliotecario.setCantidadPrestamos(bibliotecario.getCantidadPrestamos()+1);
         }
     }
     public boolean verificarDetallePrestamo(int cantidad, Libro libro){
@@ -54,11 +56,11 @@ public class Prestamo {
     public LocalDate getFechaPrestamo() {
         return fechaPrestamo;
     }
-    public List<DetallePrestamo> getListaDetallePrestamos() {
-        return listaDetallePrestamos;
-    }
     public double getCostoPrestamoDia() {
         return costoPrestamoDia;
+    }
+    public List<DetallePrestamo> getListaDetallePrestamos() {
+        return listaDetallePrestamos;
     }
 
     public void setCodigo(String codigo) {
@@ -73,10 +75,16 @@ public class Prestamo {
     public void setFechaPrestamo(LocalDate fechaPrestamo) {
         this.fechaPrestamo = fechaPrestamo;
     }
-    public void setListaDetallePrestamos(List<DetallePrestamo> listaDetallePrestamos) {
-        this.listaDetallePrestamos = listaDetallePrestamos;
-    }
     public void setCostoPrestamoDia(double costoPrestamoDia) {
         this.costoPrestamoDia = costoPrestamoDia;
     }
+    public void setListaDetallePrestamos(List<DetallePrestamo> listaDetallePrestamos) {
+        this.listaDetallePrestamos = listaDetallePrestamos;
+    }
+
+    public String toString() {
+        return "Prestamo [codigo=" + codigo + ", bibliotecario=" + bibliotecario + ", estudiante=" + estudiante
+                + ", fechaPrestamo=" + fechaPrestamo + ", costoPrestamoDia=" + costoPrestamoDia
+                + ", listaDetallePrestamos=" + listaDetallePrestamos + "]";
+    } 
 }
