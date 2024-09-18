@@ -162,6 +162,19 @@ public class Biblioteca {
         }
         return decision;
     }
+    public void mostrarDatosPrestamo(String codigo){
+        for(Prestamo prestamoTemporal : listaPrestamos){
+            if (prestamoTemporal.getCodigo().equals(codigo)) {
+                System.out.println(prestamoTemporal.toString());
+                break;
+            }
+        }
+    }
+    public void mostrarPrestamosBibliotecarios(){
+        for(Bibliotecario bibliotecarioTemporal : listaBibliotecarios){
+            System.out.println("Nombre: " + bibliotecarioTemporal.getNombre() + ", Cedula: " + bibliotecarioTemporal.getCedula() + "\nCantidad prestamos realizados: " + bibliotecarioTemporal.getCantidadPrestamos());
+        }
+    }
 
     public String getNombre() {
         return nombre;

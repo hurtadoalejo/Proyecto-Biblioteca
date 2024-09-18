@@ -7,16 +7,21 @@ public class App {
         Prestamo prestamo = new Prestamo("1", bibliotecario, estudiante, 2024, 10, 4, 2000);
         DetallePrestamo detallePrestamo = new DetallePrestamo(2, libro);
         DetallePrestamo detallePrestamo2 = new DetallePrestamo(2, libro);
+        DetallePrestamo detallePrestamo3 = new DetallePrestamo(4, libro2);
+        DetallePrestamo detallePrestamo4 = new DetallePrestamo(3, libro2);
         Biblioteca biblioteca = new Biblioteca("Gaspar");
         prestamo.agregarDetallePrestamo(detallePrestamo);
         prestamo.agregarDetallePrestamo(detallePrestamo2);
+        prestamo.agregarDetallePrestamo(detallePrestamo3);
+        prestamo.agregarDetallePrestamo(detallePrestamo4);
         
         biblioteca.agregarBibliotecario(bibliotecario);
         biblioteca.agregarEstudiante(estudiante);
         biblioteca.agregarLibro(libro);
         biblioteca.agregarLibro(libro2);
         biblioteca.agregarPrestamo(prestamo);
-        System.out.println(prestamo.toString());
+        biblioteca.mostrarPrestamosBibliotecarios();
+        //biblioteca.mostrarDatosPrestamo("1");
         //System.out.println(biblioteca.contarCantidadPrestamosLibro("PEPITO"));
     }
 }
