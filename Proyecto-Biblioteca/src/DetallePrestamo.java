@@ -20,4 +20,8 @@ public class DetallePrestamo {
     public void setLibro(Libro libro) {
         this.libro = libro;
     }
+
+    public String toString() {
+        return "DetallePrestamo [cantidad=" + cantidad + ", libro=" + libro + "]";
+    }    
 }
