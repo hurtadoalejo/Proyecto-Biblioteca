@@ -142,6 +142,17 @@ public class Biblioteca {
         return decision;
     }
 
+    public void reemplazarLibro(Libro libroViejo, Libro libroNuevo){
+        if (verificarLibro(libroNuevo.getCodigo(), libroNuevo.getIsbn())) {
+            for(int a = 0; a < listaLibros.size(); a++){
+                if (listaLibros.get(a).getCodigo().equals(libroViejo.getCodigo())) {
+                    listaLibros.set(a, libroNuevo);
+                    break;
+                }
+            }
+        }
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -173,4 +184,11 @@ public class Biblioteca {
     public void setListaLibros(List<Libro> listaLibros) {
         this.listaLibros = listaLibros;
     }
+
+    @Override
+    public String toString() {
+        return "Biblioteca [nombre=" + nombre + ", listaLibros=" + listaLibros + "]";
+    }
+
+    
 }
