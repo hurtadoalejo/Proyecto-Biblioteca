@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.LinkedList;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Biblioteca {
     private String nombre;
@@ -38,6 +40,7 @@ public class Biblioteca {
         for(Libro libroTemporal : listaLibros){
             if (libroTemporal.getCodigo().equals(codigo)) {
                 listaLibros.remove(libroTemporal);
+                break;
             }
         }
     }
@@ -60,6 +63,7 @@ public class Biblioteca {
         for(Estudiante estudianteTemporal: listaEstudiantes){
             if (estudianteTemporal.getCedula().equals(cedula)) {
                 listaEstudiantes.remove(estudianteTemporal);
+                break;
             }
         }
     }
@@ -82,6 +86,7 @@ public class Biblioteca {
         for(Bibliotecario bibliotecarioTemporal : listaBibliotecarios){
             if (bibliotecarioTemporal.getCedula().equals(cedula)) {
                 listaBibliotecarios.remove(bibliotecarioTemporal);
+                break;
             }
         }
     }
@@ -90,10 +95,9 @@ public class Biblioteca {
         if (verificarPrestamo(prestamo.getCodigo())) {
             listaPrestamos.add(prestamo);
             int cantidadPrestamos = prestamo.getBibliotecario().getCantidadPrestamos();
-            prestamo.getBibliotecario().setCantidadPrestamos(cantidadPrestamos++);;
+            prestamo.getBibliotecario().setCantidadPrestamos(++cantidadPrestamos);
         }
     }
-
     public boolean verificarPrestamo(String codigo){
         boolean decision = true;
         for(Prestamo prestamoTemporal: listaPrestamos){
@@ -103,13 +107,32 @@ public class Biblioteca {
         }
         return decision;
     }
-    
     public void eliminarPrestamo(String codigo){
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
+                int cantidadPrestamos = prestamoTemporal.getBibliotecario().getCantidadPrestamos();
+                prestamoTemporal.getBibliotecario().setCantidadPrestamos(cantidadPrestamos-1);
                 listaPrestamos.remove(prestamoTemporal);
+                break;
             }
         }
+    }
+    public double entregarPrestamo(String codigo, int year, int month, int day){
+        double totalPagar = 0;
+        LocalDate fechaEntrega = LocalDate.of(year, month, day);
+        for(Prestamo prestamoTemporal: listaPrestamos){
+            if (prestamoTemporal.getCodigo().equals(codigo)) {
+                for(DetallePrestamo detallePrestamoTemporal: prestamoTemporal.getListaDetallePrestamos()){
+                    int unidadesPoner = detallePrestamoTemporal.getCantidad();
+                    int unidadesActuales = detallePrestamoTemporal.getLibro().getUnidadesDisponibles();
+                    detallePrestamoTemporal.getLibro().setUnidadesDisponibles(unidadesActuales+unidadesPoner);
+                }
+                totalPagar = prestamoTemporal.getCostoPrestamoDia() * ChronoUnit.DAYS.between(fechaEntrega, prestamoTemporal.getFechaPrestamo());
+                listaPrestamos.remove(prestamoTemporal);
+                break;
+            }
+        }
+        return totalPagar;
     }
 
     public void mostrarDatosLibro(String codigo){
@@ -162,6 +185,7 @@ public class Biblioteca {
         }
         return decision;
     }
+    
     public void mostrarDatosPrestamo(String codigo){
         for(Prestamo prestamoTemporal : listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
@@ -175,6 +199,11 @@ public class Biblioteca {
             System.out.println("Nombre: " + bibliotecarioTemporal.getNombre() + ", Cedula: " + bibliotecarioTemporal.getCedula() + "\nCantidad prestamos realizados: " + bibliotecarioTemporal.getCantidadPrestamos());
         }
     }
+    /*public double calcularDineroRecaudado(){
+        double dineroRecaudado = 0;
+
+
+    }*/
 
     public String getNombre() {
         return nombre;
@@ -208,10 +237,7 @@ public class Biblioteca {
         this.listaLibros = listaLibros;
     }
 
-    @Override
     public String toString() {
-        return "Biblioteca [nombre=" + nombre + ", listaLibros=" + listaLibros + "]";
+        return "Biblioteca [nombre=" + nombre + ", listaPrestamos=" + listaPrestamos + "]";
     }
-
-    
 }

@@ -20,7 +20,10 @@ public class App {
         biblioteca.agregarLibro(libro);
         biblioteca.agregarLibro(libro2);
         biblioteca.agregarPrestamo(prestamo);
-        biblioteca.mostrarPrestamosBibliotecarios();
+        System.out.println(biblioteca.toString());
+        System.out.println(biblioteca.entregarPrestamo("1", 2024, 9, 5));
+        System.out.println(biblioteca.toString());
+        //biblioteca.mostrarPrestamosBibliotecarios();
         //biblioteca.mostrarDatosPrestamo("1");
         //System.out.println(biblioteca.contarCantidadPrestamosLibro("PEPITO"));
     }
