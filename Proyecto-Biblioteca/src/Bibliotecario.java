@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Bibliotecario {
     private String nombre;
     private String cedula;
@@ -5,6 +7,7 @@ public class Bibliotecario {
     private String correo;
     private double salario;
     private int cantidadPrestamos;
+    private LocalDate fechaIngreso;
 
     /**
      * Metodo constructor de la clase Bibliotecario
@@ -14,13 +17,14 @@ public class Bibliotecario {
      * @param correo Correo del bibliotecario a crear
      * @param salarioBase salarioBase del bibliotecario a crear
      */
-    public Bibliotecario(String nombre, String cedula, String telefono, String correo, double salarioBase) {
+    public Bibliotecario(String nombre, String cedula, String telefono, String correo, double salarioBase, int year, int month, int day) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.telefono = telefono;
         this.correo = correo;
         this.salario = salarioBase;
         this.cantidadPrestamos = 0;
+        this.fechaIngreso = LocalDate.of(year, month, day);
     }
 
     public String getNombre() {
@@ -41,6 +45,9 @@ public class Bibliotecario {
     public int getCantidadPrestamos() {
         return cantidadPrestamos;
     }
+    public LocalDate getFechaIngreso() {
+        return fechaIngreso;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -60,9 +67,16 @@ public class Bibliotecario {
     public void setCantidadPrestamos(int cantidadPrestamos) {
         this.cantidadPrestamos = cantidadPrestamos;
     }
+    public void setFechaIngreso(LocalDate fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
 
+    @Override
     public String toString() {
         return "Bibliotecario [nombre=" + nombre + ", cedula=" + cedula + ", telefono=" + telefono + ", correo="
-                + correo + ", salario=" + salario + ", cantidadPrestamos=" + cantidadPrestamos + "]";
-    }  
+                + correo + ", salario=" + salario + ", cantidadPrestamos=" + cantidadPrestamos + ", fechaIngreso="
+                + fechaIngreso + "]";
+    }
+
+    
 }

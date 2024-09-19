@@ -1,6 +1,6 @@
 public class App {
     public static void main(String[] args){
-        Bibliotecario bibliotecario = new Bibliotecario("Alejo", "100", "750254", "alejo@gmail.com", 1200000);
+        Bibliotecario bibliotecario = new Bibliotecario("Alejo", "100", "750254", "alejo@gmail.com", 1200000, 2024, 4, 23);
         Estudiante estudiante = new Estudiante("Veronica", "1036", "316500", "vero@gmail.com");
         Libro libro = new Libro("2704", "100000", "Hugo", "PEPITO", "Planeta", 1980, 11,24, 5);
         Libro libro2 = new Libro("2200", "1023", "Gabos", "Flores", "Planeta", 2020, 11, 24, 7);
@@ -30,6 +30,7 @@ public class App {
         System.out.println(libro2.getUnidadesDisponibles());
         biblioteca.mostrarDineroRecaudado();
         biblioteca.mostrarPrestamosBibliotecarios();
+        System.out.println(bibliotecario.toString());
         //biblioteca.mostrarPrestamosBibliotecarios();
         //biblioteca.mostrarDatosPrestamo("1");
         //System.out.println(biblioteca.contarCantidadPrestamosLibro("PEPITO"));
