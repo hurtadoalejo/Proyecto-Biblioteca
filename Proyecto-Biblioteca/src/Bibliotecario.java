@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Bibliotecario {
     private String nombre;
@@ -16,6 +17,9 @@ public class Bibliotecario {
      * @param telefono Telefono del bibliotecario a crear
      * @param correo Correo del bibliotecario a crear
      * @param salarioBase salarioBase del bibliotecario a crear
+     * @param year Año de la fecha de ingreso del bibliotecario a crear
+     * @param month Mes de la fecha de ingreso del bibliotecario a crear
+     * @param day Dia de la fecha de ingreso del bibliotecario a crear
      */
     public Bibliotecario(String nombre, String cedula, String telefono, String correo, double salarioBase, int year, int month, int day) {
         this.nombre = nombre;
@@ -25,6 +29,11 @@ public class Bibliotecario {
         this.salario = salarioBase;
         this.cantidadPrestamos = 0;
         this.fechaIngreso = LocalDate.of(year, month, day);
+    }
+
+    public void calcularSalario(LocalDate fechaActual){
+        int aniosServicio = (int) ChronoUnit.YEARS.between(fechaIngreso, fechaActual);
+        
     }
 
     /**

@@ -96,8 +96,7 @@ public class Biblioteca {
     public void agregarPrestamo(Prestamo prestamo){
         if (verificarPrestamo(prestamo.getCodigo())) {
             listaPrestamos.add(prestamo);
-            int aplicar = 1;
-            actualizarPrestamosBibliotecario(prestamo.getBibliotecario(), aplicar);
+            actualizarPrestamosBibliotecario(prestamo.getBibliotecario(), 1);
         }
     }
     public boolean verificarPrestamo(String codigo){
@@ -249,6 +248,14 @@ public class Biblioteca {
         return estudianteMayorPrestamista; 
     }
 
+    public double calcularSalariosPagar(int year, int month, int day){
+        LocalDate fechaActual = LocalDate.of(year, month, day);
+        double salarioPagar = 0;
+        for(Bibliotecario bibliotecario : listaBibliotecarios){
+            salarioPagar += bibliotecario.calcularSalario(fechaActual);
+        }
+        return salarioPagar;
+    }
 
     public String getNombre() {
         return nombre;

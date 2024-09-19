@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class App {
     public static void main(String[] args){
         Biblioteca biblioteca = new Biblioteca("Gaspar");
@@ -5,8 +7,8 @@ public class App {
         Libro libro2 = new Libro("2", "1023", "Gabo", "Flores", "Planeta", 2020, 11, 24, 7);
         biblioteca.agregarLibro(libro);
         biblioteca.agregarLibro(libro2);
-        Bibliotecario bibliotecario = new Bibliotecario("Alejo", "100", "750254", "alejo@gmail.com", 1200000, 2024, 4, 23);
-        Bibliotecario bibliotecario2 = new Bibliotecario("Aleja", "110", "750232", "aleja@gmail.com", 1200000, 2024, 4, 23);
+        Bibliotecario bibliotecario = new Bibliotecario("Alejo", "100", "750254", "alejo@gmail.com", 1200000, 2023, 10, 25);
+        Bibliotecario bibliotecario2 = new Bibliotecario("Aleja", "110", "750232", "aleja@gmail.com", 1200000, 2022, 10, 25);
         biblioteca.agregarBibliotecario(bibliotecario);
         biblioteca.agregarBibliotecario(bibliotecario2);
         Estudiante estudiante = new Estudiante("Veronica", "1036000000", "3165000000", "vero@gmail.com");
@@ -25,7 +27,10 @@ public class App {
         prestamo.agregarDetallePrestamo(detallePrestamo3);
         biblioteca.agregarPrestamo(prestamo);
         biblioteca.agregarPrestamo(prestamo2);
-        biblioteca.entregarPrestamo("1", 2024, 9, 5);
+        //biblioteca.calcularSalariosPagar(2024, 10, 31);
+        LocalDate fechaActual = LocalDate.of(2024, 10, 25);
+        bibliotecario2.calcularSalario(fechaActual);
+        //biblioteca.entregarPrestamo("1", 2024, 9, 5);
         //System.out.println(biblioteca.getListaPrestamos());
         //prestamo.eliminarDetallePrestamo(detallePrestamo);
         //biblioteca.eliminarPrestamo("1");   
