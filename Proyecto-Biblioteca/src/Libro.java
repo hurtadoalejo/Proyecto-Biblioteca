@@ -34,6 +34,34 @@ public class Libro {
     }
 
     /**
+     * Metodo para disminuir la cantidad de libros disponibles
+     * @param cantidad Cantidad a disminuir
+     */
+    public void disminuirDisponibles(int cantidad){
+        unidadesDisponibles -= cantidad;
+        actualizarEstadoLibro();
+    }
+    /**
+     * Metodo para aumentar la cantidad de libros disponibles
+     * @param cantidad Cantidad a aumentar
+     */
+    public void aumentarDisponibles(int cantidad){
+        unidadesDisponibles += cantidad;
+        actualizarEstadoLibro();
+    }
+    /**
+     * Metodo para actualizar el estado del libro
+     */
+    public void actualizarEstadoLibro(){
+        if (unidadesDisponibles == 0) {
+            estadoLibro = "No disponible";
+        }
+        else if (unidadesDisponibles > 0) {
+            estadoLibro = "Disponible";
+        }
+    }
+
+    /**
      * Metodo para obtener el codigo del libro
      * @return Codigo del libro
      */

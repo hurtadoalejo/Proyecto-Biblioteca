@@ -24,22 +24,9 @@ public class Prestamo {
     public void agregarDetallePrestamo(DetallePrestamo detallePrestamo){
         Libro libro = detallePrestamo.getLibro();
         int cantidad = detallePrestamo.getCantidad();
-        boolean addInList = true;
-        if (verificarDetallePrestamo(cantidad, libro)) {
-            for(DetallePrestamo detallePrestamoTemporal : listaDetallePrestamos){
-                if (detallePrestamoTemporal.getLibro().getCodigo().equals(libro.getCodigo())) {
-                    detallePrestamoTemporal.setCantidad(detallePrestamoTemporal.getCantidad()+cantidad);
-                    addInList = false;
-                    break;
-                }
-            }
-            if (addInList) {
-                listaDetallePrestamos.add(detallePrestamo);
-            }
-            libro.setUnidadesDisponibles(libro.getUnidadesDisponibles()-cantidad);
-        }
+        listaDetallePrestamos.add(detallePrestamo);
+        libro.disminuirDisponibles(cantidad);
     }
-    
     public boolean verificarDetallePrestamo(int cantidad, Libro libro){
         boolean decision = true;
         if (cantidad > libro.getUnidadesDisponibles() ) {
@@ -48,11 +35,20 @@ public class Prestamo {
         return decision;
     } 
     public void eliminarDetallePrestamo(DetallePrestamo detallePrestamo){
-        for(DetallePrestamo detallePrestamoPrueba : listaDetallePrestamos){
-            if (detallePrestamoPrueba.getLibro().getCodigo().equals(detallePrestamoPrueba.getLibro().getCodigo())) {
-                listaDetallePrestamos.remove(detallePrestamoPrueba);
-                detallePrestamo.getLibro().setUnidadesDisponibles(detallePrestamo.getLibro().getUnidadesDisponibles()+detallePrestamo.getCantidad());
-            }
+        detallePrestamo.getLibro().aumentarDisponibles(detallePrestamo.getCantidad());
+        listaDetallePrestamos.remove(detallePrestamo);
+    }
+
+    public void eliminarDetallesPrestamos(){
+        for(DetallePrestamo detallePrestamoTemporal : listaDetallePrestamos){
+            detallePrestamoTemporal.getLibro().aumentarDisponibles(detallePrestamoTemporal.getCantidad());
+            eliminarDetallePrestamo(detallePrestamoTemporal);
+        }
+    }
+    
+    public void actualizarLibrosDisponibles(){
+        for(DetallePrestamo detallePrestamoTemporal : listaDetallePrestamos){
+            detallePrestamoTemporal.getLibro().aumentarDisponibles(detallePrestamoTemporal.getCantidad());
         }
     }
 

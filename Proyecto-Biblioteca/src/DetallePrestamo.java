@@ -47,6 +47,6 @@ public class DetallePrestamo {
      * @return Informacion del detalle de prestamo
      */
     public String toString() {
-        return "DetallePrestamo [cantidad=" + cantidad + ", libro=" + libro + "]";
+        return "DetallePrestamo [cantidad=" + cantidad + ", libro=" + libro.getTitulo() + "]";
     }    
 }

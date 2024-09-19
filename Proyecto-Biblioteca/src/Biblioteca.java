@@ -96,8 +96,8 @@ public class Biblioteca {
     public void agregarPrestamo(Prestamo prestamo){
         if (verificarPrestamo(prestamo.getCodigo())) {
             listaPrestamos.add(prestamo);
-            int cantidadPrestamosBibliotecario = prestamo.getBibliotecario().getCantidadPrestamos();
-            prestamo.getBibliotecario().setCantidadPrestamos(++cantidadPrestamosBibliotecario);
+            int aplicar = 1;
+            actualizarPrestamosBibliotecario(prestamo.getBibliotecario(), aplicar);
         }
     }
     public boolean verificarPrestamo(String codigo){
@@ -112,8 +112,8 @@ public class Biblioteca {
     public void eliminarPrestamo(String codigo){
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
-                int cantidadPrestamosBibliotecario = prestamoTemporal.getBibliotecario().getCantidadPrestamos();
-                prestamoTemporal.getBibliotecario().setCantidadPrestamos(cantidadPrestamosBibliotecario-1);
+                actualizarPrestamosBibliotecario(prestamoTemporal.getBibliotecario(), -1);
+                prestamoTemporal.eliminarDetallesPrestamos();
                 listaPrestamos.remove(prestamoTemporal);
                 break;
             }
@@ -123,7 +123,7 @@ public class Biblioteca {
         LocalDate fechaEntrega = LocalDate.of(year, month, day);
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
-                actualizarUnidadesDisponibles(prestamoTemporal);
+                prestamoTemporal.actualizarLibrosDisponibles();
                 double totalPagar = calcularCostoPrestamo(prestamoTemporal, fechaEntrega);
                 aumentarDineroRecaudado(totalPagar);
                 mostrarPrecioPrestamo(totalPagar);
@@ -132,21 +132,22 @@ public class Biblioteca {
             }
         }
     }
-    public void actualizarUnidadesDisponibles(Prestamo prestamoTemporal){
-        for(DetallePrestamo detallePrestamoTemporal: prestamoTemporal.getListaDetallePrestamos()){
-            int unidadesPoner = detallePrestamoTemporal.getCantidad();
-            int unidadesActuales = detallePrestamoTemporal.getLibro().getUnidadesDisponibles();
-            detallePrestamoTemporal.getLibro().setUnidadesDisponibles(unidadesActuales+unidadesPoner);
-        }
+
+    public void actualizarPrestamosBibliotecario(Bibliotecario bibliotecario, int aplicar){
+        int totalPrestamos = bibliotecario.getCantidadPrestamos()+aplicar;
+        bibliotecario.setCantidadPrestamos(totalPrestamos);
     }
+
     public double calcularCostoPrestamo(Prestamo prestamoTemporal, LocalDate fechaEntrega){
         double totalPagar = 0;
         totalPagar = prestamoTemporal.getCostoPrestamoDia() * ChronoUnit.DAYS.between(fechaEntrega, prestamoTemporal.getFechaPrestamo());
         return totalPagar;
     }
+
     public void aumentarDineroRecaudado(Double totalPagar){
         dineroRecaudado += totalPagar;
     }
+
     public void mostrarPrecioPrestamo(double totalPagar){
         System.out.println("El costo del prestamo es de: " + totalPagar);
     }
@@ -210,15 +211,26 @@ public class Biblioteca {
             }
         }
     }
+
     public void mostrarPrestamosBibliotecarios(){
         for(Bibliotecario bibliotecarioTemporal : listaBibliotecarios){
             System.out.println("Nombre: " + bibliotecarioTemporal.getNombre() + ", Cedula: " + bibliotecarioTemporal.getCedula() + "\nCantidad prestamos realizados: " + bibliotecarioTemporal.getCantidadPrestamos());
         }
     }
+
     public void mostrarDineroRecaudado(){
         System.out.println("El dinero recaudado por la biblioteca ha sido de: " + dineroRecaudado);
     }
 
+    public void mostrarMayorPrestamista(){
+        Estudiante estudianteMayorPrestamista = saberMayorPrestamista();
+        if (estudianteMayorPrestamista == null) {
+            System.out.println("No hay un estudiante que tenga algún prestamo solicitado");
+        }
+        else{
+            System.out.println("El estudiante con más prestamos es: " + estudianteMayorPrestamista.toString());
+        }
+    }
     public Estudiante saberMayorPrestamista(){
         Estudiante estudianteMayorPrestamista = null;
         int mayorCantidadPrestamos = 0;
@@ -236,15 +248,7 @@ public class Biblioteca {
         }
         return estudianteMayorPrestamista; 
     }
-    public void mostrarMayorPrestamista(){
-        Estudiante estudianteMayorPrestamista = saberMayorPrestamista();
-        if (estudianteMayorPrestamista == null) {
-            System.out.println("No hay un estudiante que tenga algún prestamo solicitado");
-        }
-        else{
-            System.out.println("El estudiante con más prestamos es: " + estudianteMayorPrestamista.toString());
-        }
-    }
+
 
     public String getNombre() {
         return nombre;
@@ -283,5 +287,4 @@ public class Biblioteca {
     public void setListaLibros(List<Libro> listaLibros) {
         this.listaLibros = listaLibros;
     }
-
 }
