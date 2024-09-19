@@ -5,6 +5,7 @@ import java.time.temporal.ChronoUnit;
 
 public class Biblioteca {
     private String nombre;
+    private double dineroRecaudado;
     private List<Estudiante> listaEstudiantes;
     private List<Bibliotecario> listaBibliotecarios;
     private List<Prestamo> listaPrestamos;
@@ -16,6 +17,7 @@ public class Biblioteca {
      */
     public Biblioteca(String nombre){
         this.nombre = nombre;
+        dineroRecaudado = 0;
         listaEstudiantes = new LinkedList<>();
         listaBibliotecarios = new LinkedList<>();
         listaPrestamos = new LinkedList<>();
@@ -117,22 +119,36 @@ public class Biblioteca {
             }
         }
     }
-    public double entregarPrestamo(String codigo, int year, int month, int day){
-        double totalPagar = 0;
+    public void entregarPrestamo(String codigo, int year, int month, int day){
         LocalDate fechaEntrega = LocalDate.of(year, month, day);
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
-                for(DetallePrestamo detallePrestamoTemporal: prestamoTemporal.getListaDetallePrestamos()){
-                    int unidadesPoner = detallePrestamoTemporal.getCantidad();
-                    int unidadesActuales = detallePrestamoTemporal.getLibro().getUnidadesDisponibles();
-                    detallePrestamoTemporal.getLibro().setUnidadesDisponibles(unidadesActuales+unidadesPoner);
-                }
-                totalPagar = prestamoTemporal.getCostoPrestamoDia() * ChronoUnit.DAYS.between(fechaEntrega, prestamoTemporal.getFechaPrestamo());
+                actualizarUnidadesDisponibles(prestamoTemporal);
+                double totalPagar = calcularCostoPrestamo(prestamoTemporal, fechaEntrega);
+                aumentarDineroRecaudado(totalPagar);
+                mostrarPrecioPrestamo(totalPagar);
                 listaPrestamos.remove(prestamoTemporal);
                 break;
             }
         }
+    }
+    public void actualizarUnidadesDisponibles(Prestamo prestamoTemporal){
+        for(DetallePrestamo detallePrestamoTemporal: prestamoTemporal.getListaDetallePrestamos()){
+            int unidadesPoner = detallePrestamoTemporal.getCantidad();
+            int unidadesActuales = detallePrestamoTemporal.getLibro().getUnidadesDisponibles();
+            detallePrestamoTemporal.getLibro().setUnidadesDisponibles(unidadesActuales+unidadesPoner);
+        }
+    }
+    public double calcularCostoPrestamo(Prestamo prestamoTemporal, LocalDate fechaEntrega){
+        double totalPagar = 0;
+        totalPagar = prestamoTemporal.getCostoPrestamoDia() * ChronoUnit.DAYS.between(fechaEntrega, prestamoTemporal.getFechaPrestamo());
         return totalPagar;
+    }
+    public void aumentarDineroRecaudado(Double totalPagar){
+        dineroRecaudado += totalPagar;
+    }
+    public void mostrarPrecioPrestamo(double totalPagar){
+        System.out.println("El costo del prestamo es de: " + totalPagar);
     }
 
     public void mostrarDatosLibro(String codigo){
@@ -199,14 +215,15 @@ public class Biblioteca {
             System.out.println("Nombre: " + bibliotecarioTemporal.getNombre() + ", Cedula: " + bibliotecarioTemporal.getCedula() + "\nCantidad prestamos realizados: " + bibliotecarioTemporal.getCantidadPrestamos());
         }
     }
-    /*public double calcularDineroRecaudado(){
-        double dineroRecaudado = 0;
-
-
-    }*/
+    public void mostrarDineroRecaudado(){
+        System.out.println("El dinero recaudado por la biblioteca ha sido de: " + dineroRecaudado);
+    }
 
     public String getNombre() {
         return nombre;
+    }
+    public double getDineroRecaudado() {
+        return dineroRecaudado;
     }
     public List<Estudiante> getListaEstudiantes() {
         return listaEstudiantes;
@@ -223,6 +240,9 @@ public class Biblioteca {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public void setDineroRecaudado(double dineroRecaudado) {
+        this.dineroRecaudado = dineroRecaudado;
     }
     public void setListaEstudiantes(List<Estudiante> listaEstudiantes) {
         this.listaEstudiantes = listaEstudiantes;
