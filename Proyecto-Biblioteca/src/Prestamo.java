@@ -9,6 +9,7 @@ public class Prestamo {
     private LocalDate fechaPrestamo;
     private double costoPrestamoDia;
     private List<DetallePrestamo> listaDetallePrestamos;
+    private String estadoPrestamo;
     
     public Prestamo(String codigo, Bibliotecario bibliotecario, Estudiante estudiante, int anio, int mes, int dia, int costoPrestamoDia) {
         this.codigo = codigo;
@@ -17,6 +18,7 @@ public class Prestamo {
         this.fechaPrestamo = LocalDate.of(anio, mes, dia);
         this.costoPrestamoDia = costoPrestamoDia;
         listaDetallePrestamos = new LinkedList<>();
+        estadoPrestamo = "Pendiente";
     }
 
     public void agregarDetallePrestamo(DetallePrestamo detallePrestamo){
@@ -72,6 +74,9 @@ public class Prestamo {
     public List<DetallePrestamo> getListaDetallePrestamos() {
         return listaDetallePrestamos;
     }
+    public String getEstadoPrestamo() {
+        return estadoPrestamo;
+    }
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
@@ -91,10 +96,13 @@ public class Prestamo {
     public void setListaDetallePrestamos(List<DetallePrestamo> listaDetallePrestamos) {
         this.listaDetallePrestamos = listaDetallePrestamos;
     }
+    public void setEstadoPrestamo(String estadoPrestamo) {
+        this.estadoPrestamo = estadoPrestamo;
+    }
 
     public String toString() {
         return "Prestamo [codigo=" + codigo + ", bibliotecario=" + bibliotecario + ", estudiante=" + estudiante
                 + ", fechaPrestamo=" + fechaPrestamo + ", costoPrestamoDia=" + costoPrestamoDia
-                + ", listaDetallePrestamos=" + listaDetallePrestamos + "]";
-    } 
+                + ", listaDetallePrestamos=" + listaDetallePrestamos + ", estadoPrestamo=" + estadoPrestamo + "]";
+    }  
 }

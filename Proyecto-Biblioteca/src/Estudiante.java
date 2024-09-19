@@ -3,7 +3,6 @@ public class Estudiante {
     private String cedula;
     private String telefono;
     private String correo;
-    private int cantidadPrestamosSolicitados;
 
     /**
      * Metodo constructor de la clase Estudiante
@@ -17,7 +16,6 @@ public class Estudiante {
         this.cedula = cedula;
         this.telefono = telefono;
         this.correo = correo;
-        cantidadPrestamosSolicitados = 0;
     }
 
     /**
@@ -48,13 +46,6 @@ public class Estudiante {
     public String getCorreo() {
         return correo;
     }
-    /**
-     * Metodo para obtener la cantidad de prestamos solicitados del estudiante
-     * @return Cantidad prestamos solicitados del estudiante
-     */
-    public int getCantidadPrestamosSolicitados() {
-        return cantidadPrestamosSolicitados;
-    }
 
     /**
      * Metodo para modificar el nombre del estudiante
@@ -84,13 +75,6 @@ public class Estudiante {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    /**
-     * Metodo para modificar la cantidad de prestamos solicitados del estudiante
-     * @param nombre Nueva cantidad de prestamos solicitados por el estudiante
-     */
-    public void setCantidadPrestamosSolicitados(int cantidadPrestamosSolicitados) {
-        this.cantidadPrestamosSolicitados = cantidadPrestamosSolicitados;
-    }
 
     /**
      * Metodo para obtener la informacion del estudiante
@@ -98,6 +82,6 @@ public class Estudiante {
      */
     public String toString() {
         return "Estudiante [nombre=" + nombre + ", cedula=" + cedula + ", telefono=" + telefono + ", correo=" + correo
-                + ", cantidadPrestamosSolicitados=" + cantidadPrestamosSolicitados + "]";
+                + "]";
     }
 }

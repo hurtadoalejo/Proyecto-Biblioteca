@@ -97,9 +97,7 @@ public class Biblioteca {
         if (verificarPrestamo(prestamo.getCodigo())) {
             listaPrestamos.add(prestamo);
             int cantidadPrestamosBibliotecario = prestamo.getBibliotecario().getCantidadPrestamos();
-            int cantidadPrestamosEstudiante = prestamo.getEstudiante().getCantidadPrestamosSolicitados();
             prestamo.getBibliotecario().setCantidadPrestamos(++cantidadPrestamosBibliotecario);
-            prestamo.getEstudiante().setCantidadPrestamosSolicitados(++cantidadPrestamosEstudiante);
         }
     }
     public boolean verificarPrestamo(String codigo){
@@ -115,9 +113,7 @@ public class Biblioteca {
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
                 int cantidadPrestamosBibliotecario = prestamoTemporal.getBibliotecario().getCantidadPrestamos();
-                int cantidadPrestamosEstudiante = prestamoTemporal.getEstudiante().getCantidadPrestamosSolicitados();
                 prestamoTemporal.getBibliotecario().setCantidadPrestamos(cantidadPrestamosBibliotecario-1);
-                prestamoTemporal.getEstudiante().setCantidadPrestamosSolicitados(cantidadPrestamosEstudiante-1);
                 listaPrestamos.remove(prestamoTemporal);
                 break;
             }
@@ -131,7 +127,7 @@ public class Biblioteca {
                 double totalPagar = calcularCostoPrestamo(prestamoTemporal, fechaEntrega);
                 aumentarDineroRecaudado(totalPagar);
                 mostrarPrecioPrestamo(totalPagar);
-                listaPrestamos.remove(prestamoTemporal);
+                prestamoTemporal.setEstadoPrestamo("Pagado");
                 break;
             }
         }
@@ -227,8 +223,14 @@ public class Biblioteca {
         Estudiante estudianteMayorPrestamista = null;
         int mayorCantidadPrestamos = 0;
         for(Estudiante estudianteTemporal : listaEstudiantes){
-            if (estudianteTemporal.getCantidadPrestamosSolicitados() > mayorCantidadPrestamos) {
-                mayorCantidadPrestamos = estudianteTemporal.getCantidadPrestamosSolicitados();
+            int contador = 0;
+            for(Prestamo prestamoTemporal : listaPrestamos){
+                if (prestamoTemporal.getEstudiante().getCedula().equals(estudianteTemporal.getCedula())) {
+                    contador++;
+                }
+            }
+            if (contador > mayorCantidadPrestamos) {
+                mayorCantidadPrestamos = contador;
                 estudianteMayorPrestamista = estudianteTemporal;
             }
         }
@@ -240,7 +242,7 @@ public class Biblioteca {
             System.out.println("No hay un estudiante que tenga algún prestamo solicitado");
         }
         else{
-            System.out.println(estudianteMayorPrestamista.toString());
+            System.out.println("El estudiante con más prestamos es: " + estudianteMayorPrestamista.toString());
         }
     }
 
