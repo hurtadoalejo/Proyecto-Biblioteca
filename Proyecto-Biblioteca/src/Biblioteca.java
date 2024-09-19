@@ -96,8 +96,10 @@ public class Biblioteca {
     public void agregarPrestamo(Prestamo prestamo){
         if (verificarPrestamo(prestamo.getCodigo())) {
             listaPrestamos.add(prestamo);
-            int cantidadPrestamos = prestamo.getBibliotecario().getCantidadPrestamos();
-            prestamo.getBibliotecario().setCantidadPrestamos(++cantidadPrestamos);
+            int cantidadPrestamosBibliotecario = prestamo.getBibliotecario().getCantidadPrestamos();
+            int cantidadPrestamosEstudiante = prestamo.getEstudiante().getCantidadPrestamosSolicitados();
+            prestamo.getBibliotecario().setCantidadPrestamos(++cantidadPrestamosBibliotecario);
+            prestamo.getEstudiante().setCantidadPrestamosSolicitados(++cantidadPrestamosEstudiante);
         }
     }
     public boolean verificarPrestamo(String codigo){
@@ -112,8 +114,10 @@ public class Biblioteca {
     public void eliminarPrestamo(String codigo){
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
-                int cantidadPrestamos = prestamoTemporal.getBibliotecario().getCantidadPrestamos();
-                prestamoTemporal.getBibliotecario().setCantidadPrestamos(cantidadPrestamos-1);
+                int cantidadPrestamosBibliotecario = prestamoTemporal.getBibliotecario().getCantidadPrestamos();
+                int cantidadPrestamosEstudiante = prestamoTemporal.getEstudiante().getCantidadPrestamosSolicitados();
+                prestamoTemporal.getBibliotecario().setCantidadPrestamos(cantidadPrestamosBibliotecario-1);
+                prestamoTemporal.getEstudiante().setCantidadPrestamosSolicitados(cantidadPrestamosEstudiante-1);
                 listaPrestamos.remove(prestamoTemporal);
                 break;
             }
@@ -217,6 +221,27 @@ public class Biblioteca {
     }
     public void mostrarDineroRecaudado(){
         System.out.println("El dinero recaudado por la biblioteca ha sido de: " + dineroRecaudado);
+    }
+
+    public Estudiante saberMayorPrestamista(){
+        Estudiante estudianteMayorPrestamista = null;
+        int mayorCantidadPrestamos = 0;
+        for(Estudiante estudianteTemporal : listaEstudiantes){
+            if (estudianteTemporal.getCantidadPrestamosSolicitados() > mayorCantidadPrestamos) {
+                mayorCantidadPrestamos = estudianteTemporal.getCantidadPrestamosSolicitados();
+                estudianteMayorPrestamista = estudianteTemporal;
+            }
+        }
+        return estudianteMayorPrestamista; 
+    }
+    public void mostrarMayorPrestamista(){
+        Estudiante estudianteMayorPrestamista = saberMayorPrestamista();
+        if (estudianteMayorPrestamista == null) {
+            System.out.println("No hay un estudiante que tenga algún prestamo solicitado");
+        }
+        else{
+            System.out.println(estudianteMayorPrestamista.toString());
+        }
     }
 
     public String getNombre() {

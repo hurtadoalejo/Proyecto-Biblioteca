@@ -6,9 +6,9 @@ public class App {
         Libro libro2 = new Libro("2200", "1023", "Gabos", "Flores", "Planeta", 2020, 11, 24, 7);
         Prestamo prestamo = new Prestamo("1", bibliotecario, estudiante, 2024, 10, 4, 2000);
         Prestamo prestamo2 = new Prestamo("2", bibliotecario, estudiante, 2024, 10, 4, 2000);
-        DetallePrestamo detallePrestamo = new DetallePrestamo(2, libro);
-        DetallePrestamo detallePrestamo2 = new DetallePrestamo(2, libro);
-        DetallePrestamo detallePrestamo3 = new DetallePrestamo(4, libro2);
+        DetallePrestamo detallePrestamo = new DetallePrestamo(1, libro);
+        DetallePrestamo detallePrestamo2 = new DetallePrestamo(1, libro);
+        DetallePrestamo detallePrestamo3 = new DetallePrestamo(2, libro2);
         DetallePrestamo detallePrestamo4 = new DetallePrestamo(3, libro2);
         DetallePrestamo detallePrestamo5 = new DetallePrestamo(1, libro);
         Biblioteca biblioteca = new Biblioteca("Gaspar");
@@ -30,7 +30,7 @@ public class App {
         System.out.println(libro2.getUnidadesDisponibles());
         biblioteca.mostrarDineroRecaudado();
         biblioteca.mostrarPrestamosBibliotecarios();
-        System.out.println(bibliotecario.toString());
+        biblioteca.mostrarMayorPrestamista();
         //biblioteca.mostrarPrestamosBibliotecarios();
         //biblioteca.mostrarDatosPrestamo("1");
         //System.out.println(biblioteca.contarCantidadPrestamosLibro("PEPITO"));
