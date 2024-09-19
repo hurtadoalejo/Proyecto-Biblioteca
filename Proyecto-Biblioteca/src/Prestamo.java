@@ -11,11 +11,11 @@ public class Prestamo {
     private List<DetallePrestamo> listaDetallePrestamos;
     private String estadoPrestamo;
     
-    public Prestamo(String codigo, Bibliotecario bibliotecario, Estudiante estudiante, int anio, int mes, int dia, int costoPrestamoDia) {
+    public Prestamo(String codigo, Bibliotecario bibliotecario, Estudiante estudiante, int year, int month, int day, int costoPrestamoDia) {
         this.codigo = codigo;
         this.bibliotecario = bibliotecario;
         this.estudiante = estudiante;
-        this.fechaPrestamo = LocalDate.of(anio, mes, dia);
+        this.fechaPrestamo = LocalDate.of(year, month, day);
         this.costoPrestamoDia = costoPrestamoDia;
         listaDetallePrestamos = new LinkedList<>();
         estadoPrestamo = "Pendiente";

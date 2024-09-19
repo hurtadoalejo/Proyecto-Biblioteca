@@ -17,18 +17,18 @@ public class Libro {
      * @param autor Autor del libro a crear
      * @param titulo Titulo del libro a crear
      * @param editorial Editorial del libro a crear
-     * @param anio Año del libro a crear
-     * @param mes Mes del libro a crear
-     * @param dia Dia del libro a crear
+     * @param year Año del libro a crear
+     * @param month Mes del libro a crear
+     * @param day Dia del libro a crear
      * @param unidadesDisponibles Unidades disponibles del libro a crear
      */
-    public Libro(String codigo, String isbn, String autor, String titulo, String editorial, int anio, int mes, int dia, int unidadesDisponibles) {
+    public Libro(String codigo, String isbn, String autor, String titulo, String editorial, int year, int month, int day, int unidadesDisponibles) {
         this.codigo = codigo;
         this.isbn = isbn;
         this.autor = autor;
         this.titulo = titulo;
         this.editorial = editorial;
-        this.fechaLanzamiento = LocalDate.of(anio, mes, dia);
+        this.fechaLanzamiento = LocalDate.of(year, month, day);
         this.unidadesDisponibles = unidadesDisponibles;
         this.estadoLibro = "Disponible";
     }
