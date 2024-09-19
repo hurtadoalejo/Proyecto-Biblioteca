@@ -31,10 +31,16 @@ public class Bibliotecario {
         this.fechaIngreso = LocalDate.of(year, month, day);
     }
 
-    public void calcularSalario(LocalDate fechaActual){
+    public double calcularSalario(LocalDate fechaActual){
         int aniosServicio = (int) ChronoUnit.YEARS.between(fechaIngreso, fechaActual);
-        int salarioTotal 
-
+        double totalDineroExtra = calcularTotalDineroExtra();
+        double salarioTotal = salario + totalDineroExtra;
+        return salarioTotal;
+    }
+    
+    public double calcularTotalDineroExtra(){
+        double totalDineroExtra = dineroExtra * 0.20;
+        return totalDineroExtra;
     }
 
     /**
