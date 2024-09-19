@@ -33,7 +33,8 @@ public class Bibliotecario {
 
     public void calcularSalario(LocalDate fechaActual){
         int aniosServicio = (int) ChronoUnit.YEARS.between(fechaIngreso, fechaActual);
-        
+        int salarioTotal 
+
     }
 
     /**

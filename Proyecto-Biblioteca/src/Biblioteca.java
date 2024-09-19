@@ -252,6 +252,7 @@ public class Biblioteca {
         LocalDate fechaActual = LocalDate.of(year, month, day);
         double salarioPagar = 0;
         for(Bibliotecario bibliotecario : listaBibliotecarios){
+            double salarioBibliotecario = bibliotecario.calcularSalario(fechaActual);
             salarioPagar += bibliotecario.calcularSalario(fechaActual);
         }
         return salarioPagar;

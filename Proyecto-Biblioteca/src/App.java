@@ -25,11 +25,13 @@ public class App {
         prestamo2.agregarDetallePrestamo(detallePrestamo4);
         prestamo.agregarDetallePrestamo(detallePrestamo);
         prestamo.agregarDetallePrestamo(detallePrestamo3);
-        biblioteca.agregarPrestamo(prestamo);
+        biblioteca.agregarPrestamo(prestamo);      
         biblioteca.agregarPrestamo(prestamo2);
+        
         //biblioteca.calcularSalariosPagar(2024, 10, 31);
-        LocalDate fechaActual = LocalDate.of(2024, 10, 25);
-        bibliotecario2.calcularSalario(fechaActual);
+        //LocalDate fechaActual = LocalDate.of(2024, 10, 25);
+        //bibliotecario2.calcularSalario(fechaActual);
+
         //biblioteca.entregarPrestamo("1", 2024, 9, 5);
         //System.out.println(biblioteca.getListaPrestamos());
         //prestamo.eliminarDetallePrestamo(detallePrestamo);
