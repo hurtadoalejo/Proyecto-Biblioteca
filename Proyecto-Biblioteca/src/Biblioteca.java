@@ -284,7 +284,4 @@ public class Biblioteca {
         this.listaLibros = listaLibros;
     }
 
-    public String toString() {
-        return "Biblioteca [nombre=" + nombre + ", listaPrestamos=" + listaPrestamos + "]";
-    }
 }

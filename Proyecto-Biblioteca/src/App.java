@@ -28,11 +28,11 @@ public class App {
         System.out.println(biblioteca.getDineroRecaudado());
         System.out.println(libro.getUnidadesDisponibles());
         System.out.println(libro2.getUnidadesDisponibles());
-        biblioteca.mostrarDineroRecaudado();
-        biblioteca.mostrarPrestamosBibliotecarios();
-        biblioteca.mostrarMayorPrestamista();
+        biblioteca.mostrarDatosPrestamo("1");
+        biblioteca.mostrarDatosPrestamo("2");
+        //biblioteca.mostrarDineroRecaudado();
         //biblioteca.mostrarPrestamosBibliotecarios();
-        //biblioteca.mostrarDatosPrestamo("1");
+        //biblioteca.mostrarMayorPrestamista();
         //System.out.println(biblioteca.contarCantidadPrestamosLibro("PEPITO"));
     }
 }
