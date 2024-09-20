@@ -124,6 +124,7 @@ public class Biblioteca {
             if (prestamoTemporal.getCodigo().equals(codigo)) {
                 prestamoTemporal.actualizarLibrosDisponibles();
                 double totalPagar = calcularCostoPrestamo(prestamoTemporal, fechaEntrega);
+                prestamoTemporal.getBibliotecario().aumentarDineroExtra(totalPagar*0.20);
                 aumentarDineroRecaudado(totalPagar);
                 mostrarPrecioPrestamo(totalPagar);
                 prestamoTemporal.setEstadoPrestamo("Pagado");
@@ -139,7 +140,7 @@ public class Biblioteca {
 
     public double calcularCostoPrestamo(Prestamo prestamoTemporal, LocalDate fechaEntrega){
         double totalPagar = 0;
-        totalPagar = prestamoTemporal.getCostoPrestamoDia() * ChronoUnit.DAYS.between(fechaEntrega, prestamoTemporal.getFechaPrestamo());
+        totalPagar = prestamoTemporal.getCostoPrestamoDia() * ChronoUnit.DAYS.between(prestamoTemporal.getFechaPrestamo(), fechaEntrega);
         return totalPagar;
     }
 

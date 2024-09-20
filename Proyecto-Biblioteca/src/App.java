@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 public class App {
     public static void main(String[] args){
         Biblioteca biblioteca = new Biblioteca("Gaspar");
@@ -25,14 +23,13 @@ public class App {
         prestamo2.agregarDetallePrestamo(detallePrestamo4);
         prestamo.agregarDetallePrestamo(detallePrestamo);
         prestamo.agregarDetallePrestamo(detallePrestamo3);
-        biblioteca.agregarPrestamo(prestamo);      
+        biblioteca.agregarPrestamo(prestamo);
+        biblioteca.eliminarPrestamo("1"); 
         biblioteca.agregarPrestamo(prestamo2);
-        //biblioteca.calcularSalariosPagar(2024, 10, 31);
-        LocalDate fechaActual = LocalDate.of(2024, 10, 25);
-        //bibliotecario2.calcularSalario(fechaActual);
-
-        //biblioteca.entregarPrestamo("1", 2024, 9, 5);
-        //System.out.println(biblioteca.getListaPrestamos());
+        biblioteca.eliminarPrestamo("2"); 
+        biblioteca.entregarPrestamo("1", 2024, 11, 5);
+        biblioteca.entregarPrestamo("2", 2024, 11, 5);
+        System.out.println(biblioteca.calcularSalariosPagar(2024, 10, 24));
         //prestamo.eliminarDetallePrestamo(detallePrestamo);
         //biblioteca.eliminarPrestamo("1");   
         //biblioteca.entregarPrestamo("2", 2024, 9, 5);

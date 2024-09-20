@@ -9,6 +9,7 @@ public class Bibliotecario {
     private double salario;
     private int cantidadPrestamos;
     private LocalDate fechaIngreso;
+    private double dineroExtra;
 
     /**
      * Metodo constructor de la clase Bibliotecario
@@ -29,18 +30,25 @@ public class Bibliotecario {
         this.salario = salarioBase;
         this.cantidadPrestamos = 0;
         this.fechaIngreso = LocalDate.of(year, month, day);
+        dineroExtra = 0;
     }
 
     public double calcularSalario(LocalDate fechaActual){
         int aniosServicio = (int) ChronoUnit.YEARS.between(fechaIngreso, fechaActual);
-        double totalDineroExtra = calcularTotalDineroExtra();
+        double aumentoPorAntiguedad = (aniosServicio * 0.02)+1;
+        double totalDineroExtra = 0;
+        if (aumentoPorAntiguedad > 1) {
+            totalDineroExtra = dineroExtra * aumentoPorAntiguedad;
+        }
+        else{
+            totalDineroExtra = dineroExtra;
+        }        
         double salarioTotal = salario + totalDineroExtra;
         return salarioTotal;
     }
-    
-    public double calcularTotalDineroExtra(){
-        double totalDineroExtra = dineroExtra * 0.20;
-        return totalDineroExtra;
+
+    public void aumentarDineroExtra(double totalPagar){
+        dineroExtra += totalPagar;
     }
 
     /**
@@ -92,6 +100,13 @@ public class Bibliotecario {
     public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
+    /**
+     * Metodo para obtener el dinero extra del bibliotecario
+     * @return Dinero extra del bibliotecario
+     */
+    public double getDineroExtra() {
+        return dineroExtra;
+    }
 
     /**
      * Metodo para modificar el nombre del bibliotecario
@@ -141,6 +156,13 @@ public class Bibliotecario {
      */
     public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
+    }
+    /**
+     * Metodo para obtener el dinero extra del bibliotecario
+     * @param dineroExtra Nuevo monto de dinero extra del bibliotecario
+     */
+    public void setDineroExtra(double dineroExtra) {
+        this.dineroExtra = dineroExtra;
     }
 
     /**
