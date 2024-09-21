@@ -1,8 +1,11 @@
 import java.util.List;
 import java.util.LinkedList;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Biblioteca {
     private String nombre;
+    private double dineroRecaudado;
     private List<Estudiante> listaEstudiantes;
     private List<Bibliotecario> listaBibliotecarios;
     private List<Prestamo> listaPrestamos;
@@ -14,6 +17,7 @@ public class Biblioteca {
      */
     public Biblioteca(String nombre){
         this.nombre = nombre;
+        dineroRecaudado = 0;
         listaEstudiantes = new LinkedList<>();
         listaBibliotecarios = new LinkedList<>();
         listaPrestamos = new LinkedList<>();
@@ -38,6 +42,7 @@ public class Biblioteca {
         for(Libro libroTemporal : listaLibros){
             if (libroTemporal.getCodigo().equals(codigo)) {
                 listaLibros.remove(libroTemporal);
+                break;
             }
         }
     }
@@ -60,6 +65,7 @@ public class Biblioteca {
         for(Estudiante estudianteTemporal: listaEstudiantes){
             if (estudianteTemporal.getCedula().equals(cedula)) {
                 listaEstudiantes.remove(estudianteTemporal);
+                break;
             }
         }
     }
@@ -82,6 +88,7 @@ public class Biblioteca {
         for(Bibliotecario bibliotecarioTemporal : listaBibliotecarios){
             if (bibliotecarioTemporal.getCedula().equals(cedula)) {
                 listaBibliotecarios.remove(bibliotecarioTemporal);
+                break;
             }
         }
     }
@@ -89,11 +96,9 @@ public class Biblioteca {
     public void agregarPrestamo(Prestamo prestamo){
         if (verificarPrestamo(prestamo.getCodigo())) {
             listaPrestamos.add(prestamo);
-            int cantidadPrestamos = prestamo.getBibliotecario().getCantidadPrestamos();
-            prestamo.getBibliotecario().setCantidadPrestamos(cantidadPrestamos++);;
+            actualizarPrestamosBibliotecario(prestamo.getBibliotecario(), 1);
         }
     }
-
     public boolean verificarPrestamo(String codigo){
         boolean decision = true;
         for(Prestamo prestamoTemporal: listaPrestamos){
@@ -103,13 +108,48 @@ public class Biblioteca {
         }
         return decision;
     }
-    
     public void eliminarPrestamo(String codigo){
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
+                actualizarPrestamosBibliotecario(prestamoTemporal.getBibliotecario(), -1);
+                prestamoTemporal.eliminarDetallesPrestamos();
                 listaPrestamos.remove(prestamoTemporal);
+                break;
             }
         }
+    }
+    public void entregarPrestamo(String codigo, int year, int month, int day){
+        LocalDate fechaEntrega = LocalDate.of(year, month, day);
+        for(Prestamo prestamoTemporal: listaPrestamos){
+            if (prestamoTemporal.getCodigo().equals(codigo)) {
+                prestamoTemporal.actualizarLibrosDisponibles();
+                double totalPagar = calcularCostoPrestamo(prestamoTemporal, fechaEntrega);
+                prestamoTemporal.getBibliotecario().aumentarDineroExtra(totalPagar*0.20);
+                aumentarDineroRecaudado(totalPagar);
+                mostrarPrecioPrestamo(totalPagar);
+                prestamoTemporal.setEstadoPrestamo("Pagado");
+                break;
+            }
+        }
+    }
+
+    public void actualizarPrestamosBibliotecario(Bibliotecario bibliotecario, int aplicar){
+        int totalPrestamos = bibliotecario.getCantidadPrestamos()+aplicar;
+        bibliotecario.setCantidadPrestamos(totalPrestamos);
+    }
+
+    public double calcularCostoPrestamo(Prestamo prestamoTemporal, LocalDate fechaEntrega){
+        double totalPagar = 0;
+        totalPagar = prestamoTemporal.getCostoPrestamoDia() * ChronoUnit.DAYS.between(prestamoTemporal.getFechaPrestamo(), fechaEntrega);
+        return totalPagar;
+    }
+
+    public void aumentarDineroRecaudado(Double totalPagar){
+        dineroRecaudado += totalPagar;
+    }
+
+    public void mostrarPrecioPrestamo(double totalPagar){
+        System.out.println("El costo del prestamo es de: " + totalPagar);
     }
 
     public void mostrarDatosLibro(String codigo){
@@ -162,6 +202,7 @@ public class Biblioteca {
         }
         return decision;
     }
+    
     public void mostrarDatosPrestamo(String codigo){
         for(Prestamo prestamoTemporal : listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
@@ -170,14 +211,59 @@ public class Biblioteca {
             }
         }
     }
+
     public void mostrarPrestamosBibliotecarios(){
         for(Bibliotecario bibliotecarioTemporal : listaBibliotecarios){
             System.out.println("Nombre: " + bibliotecarioTemporal.getNombre() + ", Cedula: " + bibliotecarioTemporal.getCedula() + "\nCantidad prestamos realizados: " + bibliotecarioTemporal.getCantidadPrestamos());
         }
     }
 
+    public void mostrarDineroRecaudado(){
+        System.out.println("El dinero recaudado por la biblioteca ha sido de: " + dineroRecaudado);
+    }
+
+    public void mostrarMayorPrestamista(){
+        Estudiante estudianteMayorPrestamista = saberMayorPrestamista();
+        if (estudianteMayorPrestamista == null) {
+            System.out.println("No hay un estudiante que tenga algún prestamo solicitado");
+        }
+        else{
+            System.out.println("El estudiante con más prestamos es: " + estudianteMayorPrestamista.toString());
+        }
+    }
+    public Estudiante saberMayorPrestamista(){
+        Estudiante estudianteMayorPrestamista = null;
+        int mayorCantidadPrestamos = 0;
+        for(Estudiante estudianteTemporal : listaEstudiantes){
+            int contador = 0;
+            for(Prestamo prestamoTemporal : listaPrestamos){
+                if (prestamoTemporal.getEstudiante().getCedula().equals(estudianteTemporal.getCedula())) {
+                    contador++;
+                }
+            }
+            if (contador > mayorCantidadPrestamos) {
+                mayorCantidadPrestamos = contador;
+                estudianteMayorPrestamista = estudianteTemporal;
+            }
+        }
+        return estudianteMayorPrestamista; 
+    }
+
+    public double calcularSalariosPagar(int year, int month, int day){
+        LocalDate fechaActual = LocalDate.of(year, month, day);
+        double salarioPagar = 0;
+        for(Bibliotecario bibliotecario : listaBibliotecarios){
+                salarioPagar += bibliotecario.calcularSalario(fechaActual);
+            }
+        return salarioPagar;
+    }
+        
+
     public String getNombre() {
         return nombre;
+    }
+    public double getDineroRecaudado() {
+        return dineroRecaudado;
     }
     public List<Estudiante> getListaEstudiantes() {
         return listaEstudiantes;
@@ -195,6 +281,9 @@ public class Biblioteca {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    public void setDineroRecaudado(double dineroRecaudado) {
+        this.dineroRecaudado = dineroRecaudado;
+    }
     public void setListaEstudiantes(List<Estudiante> listaEstudiantes) {
         this.listaEstudiantes = listaEstudiantes;
     }
@@ -207,11 +296,4 @@ public class Biblioteca {
     public void setListaLibros(List<Libro> listaLibros) {
         this.listaLibros = listaLibros;
     }
-
-    @Override
-    public String toString() {
-        return "Biblioteca [nombre=" + nombre + ", listaLibros=" + listaLibros + "]";
-    }
-
-    
 }
