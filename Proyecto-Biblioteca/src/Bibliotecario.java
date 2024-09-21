@@ -1,12 +1,8 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Bibliotecario {
-    private String nombre;
-    private String cedula;
-    private String telefono;
-    private String correo;
-    private double salario;
+public class Bibliotecario extends Persona{
+    private double salarioBase;
     private int cantidadPrestamos;
     private LocalDate fechaIngreso;
     private double dineroExtra;
@@ -23,14 +19,11 @@ public class Bibliotecario {
      * @param day Dia de la fecha de ingreso del bibliotecario a crear
      */
     public Bibliotecario(String nombre, String cedula, String telefono, String correo, double salarioBase, int year, int month, int day) {
-        this.nombre = nombre;
-        this.cedula = cedula;
-        this.telefono = telefono;
-        this.correo = correo;
-        this.salario = salarioBase;
+        super(nombre, cedula, telefono, correo);
+        this.salarioBase = salarioBase;
         this.cantidadPrestamos = 0;
         this.fechaIngreso = LocalDate.of(year, month, day);
-        dineroExtra = 0;
+        this.dineroExtra = 0;
     }
 
     public double calcularSalario(LocalDate fechaActual){
@@ -43,7 +36,7 @@ public class Bibliotecario {
         else{
             totalDineroExtra = dineroExtra;
         }        
-        double salarioTotal = salario + totalDineroExtra;
+        double salarioTotal = salarioBase + totalDineroExtra;
         return salarioTotal;
     }
 
@@ -52,39 +45,11 @@ public class Bibliotecario {
     }
 
     /**
-     * Metodo para obtener el nombre del bibliotecario
-     * @return Nombre del bibliotecario
+     * Metodo para obtener el salario base del bibliotecario
+     * @return  Salario base del bibliotecario
      */
-    public String getNombre() {
-        return nombre;
-    }
-    /**
-     * Metodo para obtener la cedula del bibliotecario
-     * @return Cedula del bibliotecario
-     */
-    public String getCedula() {
-        return cedula;
-    }
-    /**
-     * Metodo para obtener el telefono del bibliotecario
-     * @return Telefono del bibliotecario
-     */
-    public String getTelefono() {
-        return telefono;
-    }
-    /**
-     * Metodo para obtener el correo del bibliotecario
-     * @return Correo del bibliotecario
-     */
-    public String getCorreo() {
-        return correo;
-    }
-    /**
-     * Metodo para obtener el salario del bibliotecario
-     * @return Salario del bibliotecario
-     */
-    public double getSalario() {
-        return salario;
+    public double getSalarioBase() {
+        return salarioBase;
     }
     /**
      * Metodo para obtener el correo del bibliotecario
@@ -109,39 +74,11 @@ public class Bibliotecario {
     }
 
     /**
-     * Metodo para modificar el nombre del bibliotecario
-     * @param nombre Nuevo nombre del bibliotecario
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    /**
-     * Metodo para modificar la cedula del bibliotecario
-     * @param cedula Nueva cedula del bibliotecario
-     */
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-    /**
-     * Metodo para modificar el teleffono del bibliotecario
-     * @param telefono Nuevo telefono del bibliotecario
-     */
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-    /**
-     * Metodo para modificar el correo del bibliotecario
-     * @param correo Nuevo correo del bibliotecario
-     */
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-    /**
      * Metodo para modificar el salario del bibliotecario
      * @param salario Nuevo salario del bibliotecario
      */
-    public void setSalario(double salario) {
-        this.salario = salario;
+    public void setSalarioBase(double salarioBase) {
+        this.salarioBase = salarioBase;
     }
     /**
      * Metodo para modificar la cantidad de prestamos del bibliotecario
@@ -169,7 +106,5 @@ public class Bibliotecario {
      * Metodo para obtener la informacion del bibliotecario
      * @return Informacion del bibliotecario
      */
-    public String toString() {
-        return "Bibliotecario [nombre=" + nombre + ", cedula=" + cedula + "]";
-    } 
+   
 }
