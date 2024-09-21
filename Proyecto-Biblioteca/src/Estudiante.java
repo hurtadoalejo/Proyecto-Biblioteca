@@ -81,7 +81,6 @@ public class Estudiante {
      * @return Informacion del estudiante
      */
     public String toString() {
-        return "Estudiante [nombre=" + nombre + ", cedula=" + cedula + ", telefono=" + telefono + ", correo=" + correo
-                + "]";
+        return "Estudiante: nombre=" + nombre + ", cedula=" + cedula + ", telefono=" + telefono + ", correo=" + correo;
     }
 }
