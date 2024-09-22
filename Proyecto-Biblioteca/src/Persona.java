@@ -81,6 +81,6 @@ public class Persona {
      * @return Informacion de la persona
      */
     public String toString() {
-        return "Persona: nombre=" + nombre + ", cedula=" + cedula + ", telefono=" + telefono + ", correo=" + correo;
+        return "Nombre=" + nombre + ", Cedula=" + cedula + ", Telefono=" + telefono + ", Correo=" + correo;
     }
 }

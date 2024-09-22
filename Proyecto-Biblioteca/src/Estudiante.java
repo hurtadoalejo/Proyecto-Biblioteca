@@ -1,6 +1,5 @@
 public class Estudiante extends Persona{
 
-
     /**
      * Metodo constructor de la clase Estudiante
      * @param nombre Nombre del estudiante a crear
@@ -17,6 +16,6 @@ public class Estudiante extends Persona{
      * @return Informacion del estudiante
      */
     public String toString(){
-        return super.toString();
+        return "Estudiante: " + super.toString();
     }
 }

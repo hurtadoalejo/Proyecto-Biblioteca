@@ -25,8 +25,8 @@ public class App {
         prestamo2.agregarDetallePrestamo(detallePrestamo4);
         prestamo.agregarDetallePrestamo(detallePrestamo);
         prestamo.agregarDetallePrestamo(detallePrestamo3);
-        biblioteca.entregarPrestamo("1", 2024, 11, 5);
-        biblioteca.entregarPrestamo("2", 2024, 11, 5);
+        //biblioteca.entregarPrestamo("1", 2024, 11, 5);
+        //biblioteca.entregarPrestamo("2", 2024, 11, 5);
         //System.out.println(biblioteca.calcularSalariosPagar(2024, 10, 24));
         //prestamo.eliminarDetallePrestamo(detallePrestamo);
         //biblioteca.eliminarPrestamo("1");   

@@ -186,8 +186,15 @@ public class Prestamo {
      * @return Informacion del prestamo
      */
     public String toString() {
-        return "Prestamo [codigo=" + codigo + ", bibliotecario=" + bibliotecario + ", estudiante=" + estudiante
-                + ", fechaPrestamo=" + fechaPrestamo + ", costoPrestamoDia=" + costoPrestamoDia
-                + ", listaDetallePrestamos=" + listaDetallePrestamos + ", estadoPrestamo=" + estadoPrestamo + "]";
+        String info = "Prestamo:\n" + "Codigo=" + codigo + ", Estado del prestamo=" + estadoPrestamo + "\nFecha del prestamo=" + fechaPrestamo +  "\nCosto por dia=" + costoPrestamoDia + "\nBibliotecario: " + "Nombre=" + bibliotecario.getNombre() + ", Cedula=" + bibliotecario.getCedula() + "\nEstudiante: " + "Nombre=" + estudiante.getNombre() + ", Cedula=" + estudiante.getCedula() + "\n\nDetalles del prestamo:\n";
+        if (listaDetallePrestamos.isEmpty()) {
+            info += "   No existen articulos en el prestamo";
+        }
+        else{
+            for (DetallePrestamo detallePrestamo : listaDetallePrestamos) {
+                info += detallePrestamo.toString() + "\n";
+            }
+        }
+        return info;
     }  
 }

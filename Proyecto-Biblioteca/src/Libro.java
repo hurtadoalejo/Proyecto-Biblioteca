@@ -180,8 +180,6 @@ public class Libro {
      * @return Informacion del libro
      */
     public String toString() {
-        return "Libro [codigo=" + codigo + ", isbn=" + isbn + ", autor=" + autor + ", titulo=" + titulo + ", editorial="
-                + editorial + ", fechaLanzamiento=" + fechaLanzamiento + ", unidadesDisponibles=" + unidadesDisponibles
-                + ", estadoLibro=" + estadoLibro + "]";
+        return "Libro:" + "\nCodigo=" + codigo + ", ISBN=" + isbn + ", Titulo=" + titulo + ", Autor=" + autor + "\nEditorial=" + editorial + ", Fecha de lanzamiento=" + fechaLanzamiento + "\nUnidades disponibles=" + unidadesDisponibles + ", Estado del libro=" + estadoLibro;
     }   
 }

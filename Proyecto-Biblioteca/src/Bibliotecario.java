@@ -26,6 +26,11 @@ public class Bibliotecario extends Persona{
         this.dineroExtra = 0;
     }
 
+    /**
+     * Metodo para calcular el salario final del bibliotecario
+     * @param fechaActual fecha actual al momento de calcular el salario final
+     * @return Salario final del bibliotecario
+     */
     public double calcularSalario(LocalDate fechaActual){
         int aniosServicio = (int) ChronoUnit.YEARS.between(fechaIngreso, fechaActual);
         double aumentoPorAntiguedad = (aniosServicio * 0.02)+1;
@@ -40,6 +45,10 @@ public class Bibliotecario extends Persona{
         return salarioTotal;
     }
 
+    /**
+     * Metodo para aumentar las bonificaciones monetarias del bibliotecario
+     * @param totalPagar Bonificacion monetaria a agregar al bibliotecario
+     */
     public void aumentarDineroExtra(double totalPagar){
         dineroExtra += totalPagar;
     }
@@ -106,5 +115,7 @@ public class Bibliotecario extends Persona{
      * Metodo para obtener la informacion del bibliotecario
      * @return Informacion del bibliotecario
      */
-   
+    public String toString(){
+        return "Bibliotecario: " + "Nombre=" + super.getNombre() + ", Cedula=" + super.getCedula() + ", Telefono=" + super.getTelefono() + ", Fecha de ingreso=" + fechaIngreso;
+    }
 }
