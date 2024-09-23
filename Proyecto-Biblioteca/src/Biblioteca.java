@@ -187,7 +187,7 @@ public class Biblioteca {
                 prestamoTemporal.getBibliotecario().aumentarDineroExtra(totalPagar*0.20);
                 aumentarDineroRecaudado(totalPagar);
                 mostrarPrecioPrestamo(totalPagar);
-                prestamoTemporal.setEstadoPrestamo(EstadoPrestamo.PAGADO);;
+                prestamoTemporal.setEstadoPrestamo(EstadoPrestamo.PAGADO);
                 break;
             }
         }
