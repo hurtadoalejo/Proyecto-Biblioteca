@@ -8,7 +8,7 @@ public class Libro {
     private String editorial;
     private LocalDate fechaLanzamiento;
     private int unidadesDisponibles;
-    private String estadoLibro;
+    private EstadoLibro estadoLibro;
 
     /**
      * Metodo constructor de la clase Libro
@@ -22,7 +22,7 @@ public class Libro {
      * @param day Dia del libro a crear
      * @param unidadesDisponibles Unidades disponibles del libro a crear
      */
-    public Libro(String codigo, String isbn, String autor, String titulo, String editorial, int year, int month, int day, int unidadesDisponibles) {
+    public Libro(String codigo, String isbn, String autor, String titulo, String editorial, int year, int month, int day, int unidadesDisponibles, EstadoLibro estadoLibro) {
         this.codigo = codigo;
         this.isbn = isbn;
         this.autor = autor;
@@ -30,7 +30,7 @@ public class Libro {
         this.editorial = editorial;
         this.fechaLanzamiento = LocalDate.of(year, month, day);
         this.unidadesDisponibles = unidadesDisponibles;
-        this.estadoLibro = "Disponible";
+        this.estadoLibro = estadoLibro;
     }
 
     /**
@@ -54,10 +54,10 @@ public class Libro {
      */
     public void actualizarEstadoLibro(){
         if (unidadesDisponibles == 0) {
-            estadoLibro = "No disponible";
+            estadoLibro = EstadoLibro.NO_DISPONIBLE;
         }
         else if (unidadesDisponibles > 0) {
-            estadoLibro = "Disponible";
+            estadoLibro = EstadoLibro.DISPONIBLE;
         }
     }
 
@@ -114,7 +114,7 @@ public class Libro {
      * Metodo para obtener el estado del libro
      * @return Estado del libro
      */
-    public String getEstadoLibro() {
+    public EstadoLibro getEstadoLibro() {
         return estadoLibro;
     }
 
@@ -171,7 +171,7 @@ public class Libro {
      * Metodo para modificar el estado del libro
      * @param estadoLibro Nuevo estado del libro
      */
-    public void setEstadoLibro(String estadoLibro) {
+    public void setEstadoLibro(EstadoLibro estadoLibro) {
         this.estadoLibro = estadoLibro;
     }
 

@@ -9,7 +9,7 @@ public class Prestamo {
     private LocalDate fechaPrestamo;
     private double costoPrestamoDia;
     private List<DetallePrestamo> listaDetallePrestamos;
-    private String estadoPrestamo;
+    private EstadoPrestamo estadoPrestamo;
     
     /**
      * Metodo constructor de la clase Prestamo
@@ -21,14 +21,14 @@ public class Prestamo {
      * @param day Dia de la fecha del prestamo a crear
      * @param costoPrestamoDia Costo del prestamo por día a crear
      */
-    public Prestamo(String codigo, Bibliotecario bibliotecario, Estudiante estudiante, int year, int month, int day, double costoPrestamoDia) {
+    public Prestamo(String codigo, Bibliotecario bibliotecario, Estudiante estudiante, int year, int month, int day, double costoPrestamoDia, EstadoPrestamo estadoPrestamo) {
         this.codigo = codigo;
         this.bibliotecario = bibliotecario;
         this.estudiante = estudiante;
         this.fechaPrestamo = LocalDate.of(year, month, day);
         this.costoPrestamoDia = costoPrestamoDia;
         listaDetallePrestamos = new LinkedList<>();
-        estadoPrestamo = "Pendiente";
+        this.estadoPrestamo = estadoPrestamo;
     }
 
     /**
@@ -127,7 +127,7 @@ public class Prestamo {
      * Metodo para obtener el estado del prestamo
      * @return Estado del prestamo
      */
-    public String getEstadoPrestamo() {
+    public EstadoPrestamo getEstadoPrestamo() {
         return estadoPrestamo;
     }
 
@@ -177,7 +177,7 @@ public class Prestamo {
      * Metodo para modificar el estado del prestamo
      * @param estadoPrestamo Nuevo estado del prestamo
      */
-    public void setEstadoPrestamo(String estadoPrestamo) {
+    public void setEstadoPrestamo(EstadoPrestamo estadoPrestamo) {
         this.estadoPrestamo = estadoPrestamo;
     }
 
