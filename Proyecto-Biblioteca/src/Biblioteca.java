@@ -139,7 +139,7 @@ public class Biblioteca {
     public void agregarPrestamo(Prestamo prestamo){
         if (verificarPrestamo(prestamo.getCodigo())) {
             listaPrestamos.add(prestamo);
-            actualizarPrestamosBibliotecario(prestamo.getBibliotecario(), 1);
+            prestamo.getBibliotecario().actualizarPrestamosBibliotecario(1);
         }
     }
     /**
@@ -163,7 +163,7 @@ public class Biblioteca {
     public void eliminarPrestamo(String codigo){
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
-                actualizarPrestamosBibliotecario(prestamoTemporal.getBibliotecario(), -1);
+                prestamoTemporal.getBibliotecario().actualizarPrestamosBibliotecario(-1);
                 prestamoTemporal.eliminarDetallesPrestamos();
                 listaPrestamos.remove(prestamoTemporal);
                 break;
@@ -192,16 +192,7 @@ public class Biblioteca {
             }
         }
     }
-    
-    /**
-     * Metodo para actualizar la cantidad de prestamos que tiene un bibliotecario
-     * @param bibliotecario Bibliotecario que se busca actualizar
-     * @param aplicar Cantidad de prestamos que se buscan actualizar al bibliotecario
-     */
-    public void actualizarPrestamosBibliotecario(Bibliotecario bibliotecario, int aplicar){
-        int totalPrestamos = bibliotecario.getCantidadPrestamos()+aplicar;
-        bibliotecario.setCantidadPrestamos(totalPrestamos);
-    }
+
     /**
      * Metodo para calcular el costo total de un prestamo
      * @param prestamoTemporal Prestamo con el que se va a calcular el total a pagar de este
