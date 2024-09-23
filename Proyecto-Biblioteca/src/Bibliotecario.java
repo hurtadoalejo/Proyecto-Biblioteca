@@ -25,6 +25,7 @@ public class Bibliotecario extends Persona{
         this.fechaIngreso = LocalDate.of(year, month, day);
         this.dineroExtra = 0;
     }
+    
     /**
      * Metodo para actualizar la cantidad de prestamos que tiene el bibliotecario
      * @param aplicar Cantidad de prestamos que se buscan actualizar al bibliotecario

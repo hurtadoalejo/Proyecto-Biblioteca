@@ -208,7 +208,7 @@ public class Biblioteca {
      * Metodo para adicionar el total a pagar de un prestamo a el dinero recaudado de la biblioteca
      * @param totalPagar Total a pagar de un prestamo
      */
-    public void aumentarDineroRecaudado(Double totalPagar){
+    public void aumentarDineroRecaudado(double totalPagar){
         dineroRecaudado += totalPagar;
     }
     /**
