@@ -9,7 +9,7 @@ public class Prestamo {
     private LocalDate fechaPrestamo;
     private double costoPrestamoDia;
     private List<DetallePrestamo> listaDetallePrestamos;
-    private EstadoPrestamo estadoPrestamo;
+    private String estadoPrestamo;
     
     /**
      * Metodo constructor de la clase Prestamo
@@ -21,14 +21,14 @@ public class Prestamo {
      * @param day Dia de la fecha del prestamo a crear
      * @param costoPrestamoDia Costo del prestamo por día a crear
      */
-    public Prestamo(String codigo, Bibliotecario bibliotecario, Estudiante estudiante, int year, int month, int day, double costoPrestamoDia, EstadoPrestamo estadoPrestamo) {
+    public Prestamo(String codigo, Bibliotecario bibliotecario, Estudiante estudiante, int year, int month, int day, double costoPrestamoDia) {
         this.codigo = codigo;
         this.bibliotecario = bibliotecario;
         this.estudiante = estudiante;
         this.fechaPrestamo = LocalDate.of(year, month, day);
         this.costoPrestamoDia = costoPrestamoDia;
         listaDetallePrestamos = new LinkedList<>();
-        this.estadoPrestamo = estadoPrestamo;
+        this.estadoPrestamo = "Pendiente";
     }
 
     /**
@@ -127,7 +127,7 @@ public class Prestamo {
      * Metodo para obtener el estado del prestamo
      * @return Estado del prestamo
      */
-    public EstadoPrestamo getEstadoPrestamo() {
+    public String getEstadoPrestamo() {
         return estadoPrestamo;
     }
 
@@ -177,7 +177,7 @@ public class Prestamo {
      * Metodo para modificar el estado del prestamo
      * @param estadoPrestamo Nuevo estado del prestamo
      */
-    public void setEstadoPrestamo(EstadoPrestamo estadoPrestamo) {
+    public void setEstadoPrestamo(String estadoPrestamo) {
         this.estadoPrestamo = estadoPrestamo;
     }
 
@@ -188,7 +188,7 @@ public class Prestamo {
     public String toString() {
         String info = "Prestamo:\n" + "Codigo=" + codigo + ", Estado del prestamo=" + estadoPrestamo + "\nFecha del prestamo=" + fechaPrestamo +  "\nCosto por dia=" + costoPrestamoDia + "\nBibliotecario: " + "Nombre=" + bibliotecario.getNombre() + ", Cedula=" + bibliotecario.getCedula() + "\nEstudiante: " + "Nombre=" + estudiante.getNombre() + ", Cedula=" + estudiante.getCedula() + "\n\nDetalles del prestamo:\n";
         if (listaDetallePrestamos.isEmpty()) {
-            info += "   No existen articulos en el prestamo";
+            info += "No existen articulos en el prestamo";
         }
         else{
             for (DetallePrestamo detallePrestamo : listaDetallePrestamos) {
