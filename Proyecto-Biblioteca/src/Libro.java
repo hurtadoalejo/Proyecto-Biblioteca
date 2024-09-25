@@ -8,7 +8,7 @@ public class Libro {
     private String editorial;
     private LocalDate fechaLanzamiento;
     private int unidadesDisponibles;
-    private String estadoLibro;
+    private boolean estadoLibro;
 
     /**
      * Metodo constructor de la clase Libro
@@ -30,7 +30,7 @@ public class Libro {
         this.editorial = editorial;
         this.fechaLanzamiento = LocalDate.of(year, month, day);
         this.unidadesDisponibles = unidadesDisponibles;
-        this.estadoLibro = "Disponible";
+        this.estadoLibro = true;
     }
 
     /**
@@ -54,10 +54,10 @@ public class Libro {
      */
     public void actualizarEstadoLibro(){
         if (unidadesDisponibles == 0) {
-            estadoLibro = "No disponible";
+            estadoLibro = false;
         }
         else if (unidadesDisponibles > 0) {
-            estadoLibro = "Disponible";
+            estadoLibro = true;
         }
     }
 
@@ -114,7 +114,7 @@ public class Libro {
      * Metodo para obtener el estado del libro
      * @return Estado del libro
      */
-    public String getEstadoLibro() {
+    public boolean getEstadoLibro() {
         return estadoLibro;
     }
 
@@ -171,7 +171,7 @@ public class Libro {
      * Metodo para modificar el estado del libro
      * @param estadoLibro Nuevo estado del libro
      */
-    public void setEstadoLibro(String estadoLibro) {
+    public void setEstadoLibro(boolean estadoLibro) {
         this.estadoLibro = estadoLibro;
     }
 

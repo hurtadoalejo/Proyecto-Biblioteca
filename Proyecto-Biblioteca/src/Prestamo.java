@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 public class Prestamo {
     private String codigo;
@@ -10,6 +11,7 @@ public class Prestamo {
     private double costoPrestamoDia;
     private List<DetallePrestamo> listaDetallePrestamos;
     private String estadoPrestamo;
+    private double totalPrestamo;
     
     /**
      * Metodo constructor de la clase Prestamo
@@ -29,8 +31,23 @@ public class Prestamo {
         this.costoPrestamoDia = costoPrestamoDia;
         listaDetallePrestamos = new LinkedList<>();
         this.estadoPrestamo = "Pendiente";
+        this.totalPrestamo = 0;
     }
 
+    /**
+     * Metodo para calcular el costo total del prestamo
+     * @param prestamoTemporal Prestamo con el que se va a calcular el total a pagar de este
+     * @param fechaEntrega Fecha de entrega del prestamo
+     * @return Total a pagar del prestamo
+     */
+    public void calcularCostoPrestamo(LocalDate fechaEntrega){
+        double totalPagar = 0;
+        int diasPrestamo = (int) ChronoUnit.DAYS.between(fechaPrestamo, fechaEntrega);
+        for (DetallePrestamo detallePrestamo : listaDetallePrestamos) {
+            totalPagar += detallePrestamo.calcularSubtotal(diasPrestamo);
+        }
+        totalPrestamo = totalPagar;
+    }
     /**
      * Metodo para agregar un detalle de prestamo
      * @param detallePrestamo Detalle de prestamo que se busca agregar 
@@ -60,24 +77,23 @@ public class Prestamo {
      */
     public void eliminarDetallePrestamo(DetallePrestamo detallePrestamo){
         detallePrestamo.getLibro().aumentarDisponibles(detallePrestamo.getCantidad());
+        detallePrestamo.reiniciarSubtotal();
         listaDetallePrestamos.remove(detallePrestamo);
     }
-
     /**
-     * Metodo para eliminar todas las listas de detalles de prestamos
+     * Metodo para reiniciar el total del prestamo a 0 pesos
      */
-    public void eliminarDetallesPrestamos(){
-        for(DetallePrestamo detallePrestamoTemporal : listaDetallePrestamos){
-            eliminarDetallePrestamo(detallePrestamoTemporal);
-        }
+    public void reiniciarTotal(){
+        totalPrestamo = 0;
     }
-    
     /**
      * Metodo para actualizar todos los libros de un prestamo debido a la eliminacion de este
      */
     public void actualizarLibrosDisponibles(){
         for(DetallePrestamo detallePrestamoTemporal : listaDetallePrestamos){
-            detallePrestamoTemporal.getLibro().aumentarDisponibles(detallePrestamoTemporal.getCantidad());
+            if (estadoPrestamo.equals("Pendiente")) {
+                detallePrestamoTemporal.getLibro().aumentarDisponibles(detallePrestamoTemporal.getCantidad());
+            }      
         }
     }
 
@@ -130,6 +146,13 @@ public class Prestamo {
     public String getEstadoPrestamo() {
         return estadoPrestamo;
     }
+    /**
+     * Metodo para obtener el total del prestamo
+     * @return Total del prestamo
+     */
+    public double getTotalPrestamo() {
+        return totalPrestamo;
+    }
 
     /**
      * Metodo para modificar el codigo del prestamo
@@ -180,13 +203,20 @@ public class Prestamo {
     public void setEstadoPrestamo(String estadoPrestamo) {
         this.estadoPrestamo = estadoPrestamo;
     }
+    /**
+     * Metodo para modificar el total del prestamo
+     * @param totalPrestamo Nuevo total del prestamo
+     */
+    public void setTotalPrestamo(double totalPrestamo) {
+        this.totalPrestamo = totalPrestamo;
+    }
 
     /**
      * Metodo para obtener la informacion del prestamo
      * @return Informacion del prestamo
      */
     public String toString() {
-        String info = "Prestamo:\n" + "Codigo=" + codigo + ", Estado del prestamo=" + estadoPrestamo + "\nFecha del prestamo=" + fechaPrestamo +  "\nCosto por dia=" + costoPrestamoDia + "\nBibliotecario: " + "Nombre=" + bibliotecario.getNombre() + ", Cedula=" + bibliotecario.getCedula() + "\nEstudiante: " + "Nombre=" + estudiante.getNombre() + ", Cedula=" + estudiante.getCedula() + "\n\nDetalles del prestamo:\n";
+        String info = "Prestamo:\n" + "Codigo=" + codigo + ", Estado del prestamo=" + estadoPrestamo + "\nFecha del prestamo=" + fechaPrestamo +  "\nCosto por dia=" + costoPrestamoDia + ", Costo total=" + totalPrestamo + "\nBibliotecario: " + "Nombre=" + bibliotecario.getNombre() + ", Cedula=" + bibliotecario.getCedula() + "\nEstudiante: " + "Nombre=" + estudiante.getNombre() + ", Cedula=" + estudiante.getCedula() + "\n\nDetalles del prestamo:\n";
         if (listaDetallePrestamos.isEmpty()) {
             info += "No existen articulos en el prestamo";
         }

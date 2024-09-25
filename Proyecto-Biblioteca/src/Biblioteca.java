@@ -1,7 +1,6 @@
 import java.util.List;
 import java.util.LinkedList;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 public class Biblioteca {
     private String nombre;
@@ -137,9 +136,10 @@ public class Biblioteca {
      * @param prestamo Prestamo que se busca agregar
      */
     public void agregarPrestamo(Prestamo prestamo){
-        if (verificarPrestamo(prestamo.getCodigo())) {
+        if (verificarPrestamo(prestamo.getCodigo()) && prestamo.getEstudiante().getEstado() == true) {
             listaPrestamos.add(prestamo);
             prestamo.getBibliotecario().actualizarPrestamosBibliotecario(1);
+            prestamo.getEstudiante().agregarPrestamo(prestamo);
         }
     }
     /**
@@ -163,8 +163,10 @@ public class Biblioteca {
     public void eliminarPrestamo(String codigo){
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
+                prestamoTemporal.actualizarLibrosDisponibles(); 
                 prestamoTemporal.getBibliotecario().actualizarPrestamosBibliotecario(-1);
-                prestamoTemporal.eliminarDetallesPrestamos();
+                prestamoTemporal.reiniciarTotal();
+                prestamoTemporal.getEstudiante().eliminarPrestamo(codigo);
                 listaPrestamos.remove(prestamoTemporal);
                 break;
             }
@@ -183,26 +185,14 @@ public class Biblioteca {
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
                 prestamoTemporal.actualizarLibrosDisponibles();
-                double totalPagar = calcularCostoPrestamo(prestamoTemporal, fechaEntrega);
-                prestamoTemporal.getBibliotecario().aumentarDineroExtra(totalPagar*0.20);
-                aumentarDineroRecaudado(totalPagar);
-                mostrarPrecioPrestamo(totalPagar);
+                prestamoTemporal.calcularCostoPrestamo(fechaEntrega);
+                prestamoTemporal.getBibliotecario().aumentarDineroExtra(prestamoTemporal.getTotalPrestamo()*0.20);
+                aumentarDineroRecaudado(prestamoTemporal.getTotalPrestamo());
+                mostrarPrecioPrestamo(prestamoTemporal.getTotalPrestamo());
                 prestamoTemporal.setEstadoPrestamo("Pagado");
                 break;
             }
         }
-    }
-
-    /**
-     * Metodo para calcular el costo total de un prestamo
-     * @param prestamoTemporal Prestamo con el que se va a calcular el total a pagar de este
-     * @param fechaEntrega Fecha de entrega del prestamo
-     * @return Total a pagar del prestamo
-     */
-    public double calcularCostoPrestamo(Prestamo prestamoTemporal, LocalDate fechaEntrega){
-        double totalPagar = 0;
-        totalPagar = prestamoTemporal.getCostoPrestamoDia() * ChronoUnit.DAYS.between(prestamoTemporal.getFechaPrestamo(), fechaEntrega);
-        return totalPagar;
     }
     /**
      * Metodo para adicionar el total a pagar de un prestamo a el dinero recaudado de la biblioteca

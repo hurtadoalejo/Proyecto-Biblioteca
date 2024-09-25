@@ -1,11 +1,14 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.LinkedList;
 
 public class Bibliotecario extends Persona{
     private double salarioBase;
     private int cantidadPrestamos;
     private LocalDate fechaIngreso;
     private double dineroExtra;
+    private List<Prestamo> listaPrestamos;
 
     /**
      * Metodo constructor de la clase Bibliotecario
@@ -24,6 +27,7 @@ public class Bibliotecario extends Persona{
         this.cantidadPrestamos = 0;
         this.fechaIngreso = LocalDate.of(year, month, day);
         this.dineroExtra = 0;
+        listaPrestamos = new LinkedList<>();
     }
     
     /**
@@ -51,6 +55,42 @@ public class Bibliotecario extends Persona{
         }        
         double salarioTotal = salarioBase + totalDineroExtra;
         return salarioTotal;
+    }
+
+    /**
+     * Metodo para agregar un prestamo a la lista de prestamos del estudiante
+     * @param prestamo Prestamo que se busca agregar
+     */
+    public void agregarPrestamo(Prestamo prestamo){
+        if (verificarPrestamo(prestamo.getCodigo())) {
+            listaPrestamos.add(prestamo);
+        } 
+    }
+    /**
+     * Metodo para verificar si un prestamo tiene el mismo codigo que otro en la lista de prestamos del estudiante
+     * @param codigo Codigo del prestamo a verificar
+     * @return Decision sobre si el prestamo tiene el mismo codigo que otro
+     */
+    public boolean verificarPrestamo(String codigo){
+        boolean decision = true;
+        for (Prestamo prestamoTemporal : listaPrestamos) {
+            if (prestamoTemporal.getCodigo().equals(codigo)) {
+                decision = false;
+            }
+        }
+        return decision;
+    }
+    /**
+     * Metodo para eliminar un prestamo a la lista de prestamos del estudiante
+     * @param codigo Codigo del prestamo a eliminar
+     */
+    public void eliminarPrestamo(String codigo){
+        for (Prestamo prestamoTemporal : listaPrestamos) {
+            if (prestamoTemporal.getCodigo().equals(codigo)) {
+                listaPrestamos.remove(prestamoTemporal);
+                break;
+            }
+        }
     }
 
     /**
