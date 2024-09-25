@@ -265,6 +265,10 @@ public class Biblioteca {
         if (verificarReemplazarLibro(libroNuevo.getCodigo(), libroNuevo.getIsbn())) {
             for(int a = 0; a < listaLibros.size(); a++){
                 if (listaLibros.get(a).getCodigo().equals(libroViejo.getCodigo())) {
+                    libroViejo.getAutor().eliminarLibro(libroViejo.getCodigo());
+                    libroViejo.getEditorial().eliminarLibro(libroViejo.getCodigo());
+                    libroNuevo.getAutor().agregarLibro(libroNuevo);
+                    libroNuevo.getEditorial().agregarLibro(libroNuevo);
                     listaLibros.set(a, libroNuevo);
                     break;
                 }
@@ -272,16 +276,16 @@ public class Biblioteca {
         }
     }
     /**
-     * Metodo para verificar si un libro tiene el mismo codigo y diferente isbn en la lista de libros de la biblioteca
+     * Metodo para verificar si un libro tiene el mismo codigo e isbn en la lista de libros de la biblioteca
      * @param codigo Codigo del libro a verificar
      * @param isbn Isbn del libro a verificar
-     * @return Decision sobre si el libro tiene el mismo codigo y diferente isbn que otro o no
+     * @return Decision sobre si el libro tiene mismo codigo e isbn que otro o no
      */
     public boolean verificarReemplazarLibro(String codigo, String isbn){
-        boolean decision = false;
+        boolean decision = true;
         for(Libro libroTemporal : listaLibros){
-            if (libroTemporal.getCodigo().equals(codigo) && !libroTemporal.getIsbn().equals(isbn)) {
-                decision = true;
+            if (libroTemporal.getCodigo().equals(codigo) || libroTemporal.getIsbn().equals(isbn)) {
+                decision = false;
                 break;
             }
         }

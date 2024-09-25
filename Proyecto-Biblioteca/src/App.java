@@ -3,9 +3,11 @@ public class App {
         Autor autor = new Autor("Gabo", "995", "7520", "gabo@gmail.com", "Colombia");
         Autor autor2 = new Autor("Sanchez", "900", "5780", "sanchez@gmail.com", "Chile");
         Editorial editorial = new Editorial("Planeta", "planeta@gmail.com", "España");
+        Editorial editorial2 = new Editorial("Comics", "comics@gmail.com", "Mexico");
         Biblioteca biblioteca = new Biblioteca("Gaspar");
         Libro libro = new Libro("1", "1540", autor2, "Magia", editorial, 1980, 11,24, 5);
         Libro libro2 = new Libro("2", "1023", autor, "Flores", editorial, 2020, 11, 24, 7);
+        Libro libro3 = new Libro("3", "78999", autor2, "Margaritas", editorial2, 2011, 5, 7, 4);
         biblioteca.agregarLibro(libro);
         biblioteca.agregarLibro(libro2);
         Bibliotecario bibliotecario = new Bibliotecario("Alejo", "100", "750254", "alejo@gmail.com", 1200000, 2023, 10, 25);
@@ -28,10 +30,10 @@ public class App {
         prestamo.agregarDetallePrestamo(detallePrestamo2);
         prestamo2.agregarDetallePrestamo(detallePrestamo3);
         prestamo2.agregarDetallePrestamo(detallePrestamo4);
-        biblioteca.entregarPrestamo("1", 2024, 11, 5);
-        biblioteca.entregarPrestamo("2", 2024, 11, 5);
-        //System.out.println(biblioteca.calcularSalariosPagar(2024, 11, 5));
-        biblioteca.reemplazarLibro(libro, libro2);
+        //biblioteca.entregarPrestamo("1", 2024, 11, 5);
+        //biblioteca.entregarPrestamo("2", 2024, 11, 5);
+        //System.out.println(biblioteca.calcularSalariosPagar(2024, 11, 5))
+        //biblioteca.reemplazarLibro(libro2, libro3);
         //prestamo.eliminarDetallePrestamo(detallePrestamo);
         //biblioteca.eliminarPrestamo("1");  
         //biblioteca.mostrarDatosLibro("1"); 
