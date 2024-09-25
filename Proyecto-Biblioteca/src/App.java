@@ -1,8 +1,11 @@
 public class App {
     public static void main(String[] args){
+        Autor autor = new Autor("Gabo", "995", "7520", "gabo@gmail.com", "Colombia");
+        Autor autor2 = new Autor("Sanchez", "900", "5780", "sanchez@gmail.com", "Chile");
+        Editorial editorial = new Editorial("Planeta", "planeta@gmail.com", "España");
         Biblioteca biblioteca = new Biblioteca("Gaspar");
-        Libro libro = new Libro("1", "1540", "Hugo", "Magia", "Planeta", 1980, 11,24, 5);
-        Libro libro2 = new Libro("2", "1023", "Gabo", "Flores", "Planeta", 2020, 11, 24, 7);
+        Libro libro = new Libro("1", "1540", autor2, "Magia", editorial, 1980, 11,24, 5);
+        Libro libro2 = new Libro("2", "1023", autor, "Flores", editorial, 2020, 11, 24, 7);
         biblioteca.agregarLibro(libro);
         biblioteca.agregarLibro(libro2);
         Bibliotecario bibliotecario = new Bibliotecario("Alejo", "100", "750254", "alejo@gmail.com", 1200000, 2023, 10, 25);

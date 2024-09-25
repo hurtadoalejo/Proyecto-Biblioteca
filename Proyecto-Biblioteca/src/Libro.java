@@ -3,9 +3,9 @@ import java.time.LocalDate;
 public class Libro {
     private String codigo;
     private String isbn;
-    private String autor;
+    private Autor autor;
     private String titulo;
-    private String editorial;
+    private Editorial editorial;
     private LocalDate fechaLanzamiento;
     private int unidadesDisponibles;
     private EstadoLibro estadoLibro;
@@ -22,7 +22,7 @@ public class Libro {
      * @param day Dia del libro a crear
      * @param unidadesDisponibles Unidades disponibles del libro a crear
      */
-    public Libro(String codigo, String isbn, String autor, String titulo, String editorial, int year, int month, int day, int unidadesDisponibles) {
+    public Libro(String codigo, String isbn, Autor autor, String titulo, Editorial editorial, int year, int month, int day, int unidadesDisponibles) {
         this.codigo = codigo;
         this.isbn = isbn;
         this.autor = autor;
@@ -60,7 +60,7 @@ public class Libro {
             estadoLibro = EstadoLibro.DISPONIBLE;
         }
     }
-
+    
     /**
      * Metodo para obtener el codigo del libro
      * @return Codigo del libro
@@ -79,7 +79,7 @@ public class Libro {
      * Metodo para obtener el autor del libro
      * @return Autor del libro
      */
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
     /**
@@ -93,7 +93,7 @@ public class Libro {
      * Metodo para obtener la editorial del libro
      * @return Editorial del libro
      */
-    public String getEditorial() {
+    public Editorial getEditorial() {
         return editorial;
     }
     /**
@@ -136,7 +136,7 @@ public class Libro {
      * Metodo para modificar el autor del libro
      * @param autor Nuevo autor del libro
      */
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
     /**
@@ -150,7 +150,7 @@ public class Libro {
      * Metodo para modificar el editorial del libro
      * @param editorial Nueva editorial del libro
      */
-    public void setEditorial(String editorial) {
+    public void setEditorial(Editorial editorial) {
         this.editorial = editorial;
     }
     /**
@@ -180,6 +180,6 @@ public class Libro {
      * @return Informacion del libro
      */
     public String toString() {
-        return "Libro:" + "\nCodigo=" + codigo + ", ISBN=" + isbn + ", Titulo=" + titulo + ", Autor=" + autor + "\nEditorial=" + editorial + ", Fecha de lanzamiento=" + fechaLanzamiento + "\nUnidades disponibles=" + unidadesDisponibles + ", Estado del libro=" + estadoLibro;
+        return "Libro:" + "\nCodigo=" + codigo + ", ISBN=" + isbn + ", Titulo=" + titulo + ", Autor=" + autor.getNombre() + "\nEditorial=" + editorial.getNombre() + ", Fecha de lanzamiento=" + fechaLanzamiento + "\nUnidades disponibles=" + unidadesDisponibles + ", Estado del libro=" + estadoLibro;
     }   
 }

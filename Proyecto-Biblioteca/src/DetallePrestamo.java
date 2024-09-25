@@ -15,6 +15,7 @@ public class DetallePrestamo {
         this.prestamo = prestamo;
         subtotal = 0;
     }
+
     /**
      * Metodo para reiniciar el subtotal del detalle de prestamo a 0 pesos
      */
@@ -29,7 +30,7 @@ public class DetallePrestamo {
         double subtotal = prestamo.getCostoPrestamoDia()*cantidad*diasPrestamo;
         return subtotal;
     }
-
+    
     /**
      * Metodo para obtener la cantidad de libros del detalle de prestamo
      * @return Cantidad de libros del detalle de prestamo

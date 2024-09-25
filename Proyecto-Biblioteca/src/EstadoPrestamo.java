@@ -1,3 +1,3 @@
 public enum EstadoPrestamo {
-    PAGADO, PENDIENTE, CANCELADO;
+    PAGADO, PENDIENTE;
 }

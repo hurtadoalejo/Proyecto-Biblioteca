@@ -58,7 +58,7 @@ public class Bibliotecario extends Persona{
     }
 
     /**
-     * Metodo para agregar un prestamo a la lista de prestamos del estudiante
+     * Metodo para agregar un prestamo a la lista de prestamos del bibliotecario
      * @param prestamo Prestamo que se busca agregar
      */
     public void agregarPrestamo(Prestamo prestamo){
@@ -67,7 +67,7 @@ public class Bibliotecario extends Persona{
         } 
     }
     /**
-     * Metodo para verificar si un prestamo tiene el mismo codigo que otro en la lista de prestamos del estudiante
+     * Metodo para verificar si un prestamo tiene el mismo codigo que otro en la lista de prestamos del bibliotecario
      * @param codigo Codigo del prestamo a verificar
      * @return Decision sobre si el prestamo tiene el mismo codigo que otro
      */
@@ -76,12 +76,13 @@ public class Bibliotecario extends Persona{
         for (Prestamo prestamoTemporal : listaPrestamos) {
             if (prestamoTemporal.getCodigo().equals(codigo)) {
                 decision = false;
+                break;
             }
         }
         return decision;
     }
     /**
-     * Metodo para eliminar un prestamo a la lista de prestamos del estudiante
+     * Metodo para eliminar un prestamo a la lista de prestamos del bibliotecario
      * @param codigo Codigo del prestamo a eliminar
      */
     public void eliminarPrestamo(String codigo){
@@ -164,6 +165,10 @@ public class Bibliotecario extends Persona{
      * @return Informacion del bibliotecario
      */
     public String toString(){
-        return "Bibliotecario: " + "Nombre=" + super.getNombre() + ", Cedula=" + super.getCedula() + ", Telefono=" + super.getTelefono() + ", Fecha de ingreso=" + fechaIngreso;
+        String info = "\nBibliotecario: " + "Nombre=" + super.getNombre() + ", Cedula=" + super.getCedula() + ", Telefono=" + super.getTelefono() + ", Fecha de ingreso=" + fechaIngreso + "\nLista de prestamos realizados:\n";
+        for (Prestamo prestamo : listaPrestamos) {
+            info += "Prestamo codigo=" + prestamo.getCodigo();
+        }
+        return info;
     }
 }

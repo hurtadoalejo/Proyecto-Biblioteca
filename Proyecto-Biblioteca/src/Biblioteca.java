@@ -30,6 +30,8 @@ public class Biblioteca {
     public void agregarLibro(Libro libro){
         if (verificarLibro(libro.getCodigo(), libro.getIsbn())){
             listaLibros.add(libro);
+            libro.getAutor().agregarLibro(libro);
+            libro.getEditorial().agregarLibro(libro);
         }
     }
     /**
@@ -54,6 +56,8 @@ public class Biblioteca {
     public void eliminarLibro(String codigo){
         for(Libro libroTemporal : listaLibros){
             if (libroTemporal.getCodigo().equals(codigo)) {
+                libroTemporal.getAutor().eliminarLibro(codigo);
+                libroTemporal.getEditorial().eliminarLibro(codigo);
                 listaLibros.remove(libroTemporal);
                 break;
             }
@@ -140,6 +144,7 @@ public class Biblioteca {
             listaPrestamos.add(prestamo);
             prestamo.getBibliotecario().actualizarPrestamosBibliotecario(1);
             prestamo.getEstudiante().agregarPrestamo(prestamo);
+            prestamo.getBibliotecario().agregarPrestamo(prestamo);
         }
     }
     /**
@@ -184,6 +189,7 @@ public class Biblioteca {
         LocalDate fechaEntrega = LocalDate.of(year, month, day);
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
+                prestamoTemporal.actualizarFechaEntrega(fechaEntrega);
                 prestamoTemporal.actualizarLibrosDisponibles();
                 prestamoTemporal.calcularCostoPrestamo(fechaEntrega);
                 prestamoTemporal.getBibliotecario().aumentarDineroExtra(prestamoTemporal.getTotalPrestamo()*0.20);
