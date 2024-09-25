@@ -9,7 +9,7 @@ public class App {
         biblioteca.agregarLibro(libro);
         biblioteca.agregarLibro(libro2);
         Bibliotecario bibliotecario = new Bibliotecario("Alejo", "100", "750254", "alejo@gmail.com", 1200000, 2023, 10, 25);
-        Bibliotecario bibliotecario2 = new Bibliotecario("Aleja", "110", "750232", "aleja@gmail.com", 1200000, 2022, 10, 25);
+        Bibliotecario bibliotecario2 = new Bibliotecario("Aleja", "110", "750232", "aleja@gmail.com", 800000, 2022, 10, 25);
         biblioteca.agregarBibliotecario(bibliotecario);
         biblioteca.agregarBibliotecario(bibliotecario2);
         Estudiante estudiante = new Estudiante("Veronica", "1036000000", "3165000000", "vero@gmail.com", true);
@@ -28,9 +28,10 @@ public class App {
         prestamo.agregarDetallePrestamo(detallePrestamo2);
         prestamo2.agregarDetallePrestamo(detallePrestamo3);
         prestamo2.agregarDetallePrestamo(detallePrestamo4);
-        //biblioteca.entregarPrestamo("1", 2024, 11, 5);
-        //biblioteca.entregarPrestamo("2", 2024, 11, 5);
-        //System.out.println(biblioteca.calcularSalariosPagar(2024, 10, 24));
+        biblioteca.entregarPrestamo("1", 2024, 11, 5);
+        biblioteca.entregarPrestamo("2", 2024, 11, 5);
+        //System.out.println(biblioteca.calcularSalariosPagar(2024, 11, 5));
+        biblioteca.reemplazarLibro(libro, libro2);
         //prestamo.eliminarDetallePrestamo(detallePrestamo);
         //biblioteca.eliminarPrestamo("1");  
         //biblioteca.mostrarDatosLibro("1"); 
