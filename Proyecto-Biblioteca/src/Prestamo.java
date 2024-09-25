@@ -10,7 +10,7 @@ public class Prestamo {
     private LocalDate fechaPrestamo;
     private double costoPrestamoDia;
     private List<DetallePrestamo> listaDetallePrestamos;
-    private String estadoPrestamo;
+    private EstadoPrestamo estadoPrestamo;
     private double totalPrestamo;
     
     /**
@@ -30,7 +30,7 @@ public class Prestamo {
         this.fechaPrestamo = LocalDate.of(year, month, day);
         this.costoPrestamoDia = costoPrestamoDia;
         listaDetallePrestamos = new LinkedList<>();
-        this.estadoPrestamo = "Pendiente";
+        this.estadoPrestamo = EstadoPrestamo.PENDIENTE;
         this.totalPrestamo = 0;
     }
 
@@ -91,7 +91,7 @@ public class Prestamo {
      */
     public void actualizarLibrosDisponibles(){
         for(DetallePrestamo detallePrestamoTemporal : listaDetallePrestamos){
-            if (estadoPrestamo.equals("Pendiente")) {
+            if (estadoPrestamo.equals(EstadoPrestamo.PENDIENTE)) {
                 detallePrestamoTemporal.getLibro().aumentarDisponibles(detallePrestamoTemporal.getCantidad());
             }      
         }
@@ -143,7 +143,7 @@ public class Prestamo {
      * Metodo para obtener el estado del prestamo
      * @return Estado del prestamo
      */
-    public String getEstadoPrestamo() {
+    public EstadoPrestamo getEstadoPrestamo() {
         return estadoPrestamo;
     }
     /**
@@ -200,7 +200,7 @@ public class Prestamo {
      * Metodo para modificar el estado del prestamo
      * @param estadoPrestamo Nuevo estado del prestamo
      */
-    public void setEstadoPrestamo(String estadoPrestamo) {
+    public void setEstadoPrestamo(EstadoPrestamo estadoPrestamo) {
         this.estadoPrestamo = estadoPrestamo;
     }
     /**
