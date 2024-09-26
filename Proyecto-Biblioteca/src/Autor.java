@@ -24,7 +24,7 @@ public class Autor extends Persona{
      * @param libro Libro que se busca agregar
      */
     public void agregarLibro(Libro libro){
-        if (verificarPrestamo(libro.getCodigo())) {
+        if (verificarLibro(libro.getCodigo())) {
             listaLibros.add(libro);
         } 
     }
@@ -33,7 +33,7 @@ public class Autor extends Persona{
      * @param codigo Codigo del libro a verificar
      * @return Decision sobre si el libro tiene el mismo codigo que otro
      */
-    public boolean verificarPrestamo(String codigo){
+    public boolean verificarLibro(String codigo){
         boolean decision = true;
         for (Libro libroTemporal : listaLibros) {
             if (libroTemporal.getCodigo().equals(codigo)) {
