@@ -17,12 +17,6 @@ public class DetallePrestamo {
     }
 
     /**
-     * Metodo para reiniciar el subtotal del detalle de prestamo a 0 pesos
-     */
-    public void reiniciarSubtotal(){
-        subtotal = 0;
-    }
-    /**
      * Metodo para calcular el subtotal del detalle de prestamo
      * @return Subtotal del detalle de prestamo
      */

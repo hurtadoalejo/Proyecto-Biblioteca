@@ -168,10 +168,10 @@ public class Biblioteca {
     public void eliminarPrestamo(String codigo){
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
-                prestamoTemporal.actualizarLibrosDisponibles(); 
                 prestamoTemporal.getBibliotecario().actualizarPrestamosBibliotecario(-1);
                 prestamoTemporal.getBibliotecario().eliminarPrestamo(codigo);
                 prestamoTemporal.getEstudiante().eliminarPrestamo(codigo);
+                prestamoTemporal.eliminarDetallesPrestamos();
                 listaPrestamos.remove(prestamoTemporal);
                 break;
             }

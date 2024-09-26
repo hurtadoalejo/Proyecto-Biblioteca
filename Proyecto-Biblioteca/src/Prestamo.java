@@ -37,6 +37,14 @@ public class Prestamo {
     }
 
     /**
+     * Metodo para eliminar todos los detalles de prestamos del prestamo
+     */
+    public void eliminarDetallesPrestamos(){
+        while (!listaDetallePrestamos.isEmpty()) {
+            eliminarDetallePrestamo(listaDetallePrestamos.get(0));
+        }
+    }
+    /**
      * Metodo para actualizar la fecha de entrega del prestamo
      */
     public void actualizarFechaEntrega(LocalDate fechaEntrega){
@@ -84,8 +92,9 @@ public class Prestamo {
      * @param detallePrestamo Detalle de prestamo que se eliminara
      */
     public void eliminarDetallePrestamo(DetallePrestamo detallePrestamo){
-        detallePrestamo.getLibro().aumentarDisponibles(detallePrestamo.getCantidad());
-        detallePrestamo.reiniciarSubtotal();
+        if (estadoPrestamo.equals(EstadoPrestamo.PENDIENTE)) {
+            detallePrestamo.getLibro().aumentarDisponibles(detallePrestamo.getCantidad());
+        }   
         listaDetallePrestamos.remove(detallePrestamo);
     }
     /**
