@@ -189,7 +189,7 @@ public class Biblioteca {
         LocalDate fechaEntrega = LocalDate.of(year, month, day);
         for(Prestamo prestamoTemporal: listaPrestamos){
             if (prestamoTemporal.getCodigo().equals(codigo)) {
-                prestamoTemporal.actualizarFechaEntrega(fechaEntrega);
+                prestamoTemporal.setFechaEntrega(fechaEntrega);
                 prestamoTemporal.actualizarLibrosDisponibles();
                 prestamoTemporal.calcularCostoPrestamo(fechaEntrega);
                 prestamoTemporal.getBibliotecario().aumentarDineroExtra(prestamoTemporal.getTotalPrestamo()*0.20);
