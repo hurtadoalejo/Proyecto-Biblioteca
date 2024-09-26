@@ -89,12 +89,6 @@ public class Prestamo {
         listaDetallePrestamos.remove(detallePrestamo);
     }
     /**
-     * Metodo para reiniciar el total del prestamo a 0 pesos
-     */
-    public void reiniciarTotal(){
-        totalPrestamo = 0;
-    }
-    /**
      * Metodo para actualizar todos los libros de un prestamo debido a la eliminacion de este
      */
     public void actualizarLibrosDisponibles(){

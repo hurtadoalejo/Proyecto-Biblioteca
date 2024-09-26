@@ -170,7 +170,7 @@ public class Biblioteca {
             if (prestamoTemporal.getCodigo().equals(codigo)) {
                 prestamoTemporal.actualizarLibrosDisponibles(); 
                 prestamoTemporal.getBibliotecario().actualizarPrestamosBibliotecario(-1);
-                prestamoTemporal.reiniciarTotal();
+                prestamoTemporal.getBibliotecario().eliminarPrestamo(codigo);
                 prestamoTemporal.getEstudiante().eliminarPrestamo(codigo);
                 listaPrestamos.remove(prestamoTemporal);
                 break;
