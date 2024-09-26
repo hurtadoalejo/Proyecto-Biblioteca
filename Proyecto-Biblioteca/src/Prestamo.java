@@ -45,12 +45,6 @@ public class Prestamo {
         }
     }
     /**
-     * Metodo para actualizar la fecha de entrega del prestamo
-     */
-    public void actualizarFechaEntrega(LocalDate fechaEntrega){
-        setFechaEntrega(fechaEntrega);
-    }
-    /**
      * Metodo para calcular el costo total del prestamo
      * @param prestamoTemporal Prestamo con el que se va a calcular el total a pagar de este
      * @param fechaEntrega Fecha de entrega del prestamo
