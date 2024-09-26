@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class Estudiante extends Persona{
 
-    private boolean estado;
+    private EstadoEstudiante estado;
     private List<Prestamo> listaPrestamos;
 
     /**
@@ -14,7 +14,7 @@ public class Estudiante extends Persona{
      * @param correo Correo del estudiante a crear
      * @param estado Estado del estudiante a crear
      */
-    public Estudiante(String nombre, String cedula, String telefono, String correo, boolean estado) {
+    public Estudiante(String nombre, String cedula, String telefono, String correo, EstadoEstudiante estado) {
         super(nombre, cedula, telefono, correo);
         this.estado = estado;
         listaPrestamos = new LinkedList<>();
@@ -60,7 +60,7 @@ public class Estudiante extends Persona{
      * Metodo para obtener el estado del estudiante
      * @return Estado del estudiante
      */
-    public boolean getEstado() {
+    public EstadoEstudiante getEstado() {
         return estado;
     }
     /**
@@ -75,7 +75,7 @@ public class Estudiante extends Persona{
      * Metodo para modificar el estado del estudiante
      * @param estado Nuevo estado del estudiante
      */
-    public void setEstado(boolean estado) {
+    public void setEstado(EstadoEstudiante estado) {
         this.estado = estado;
     }
     /**

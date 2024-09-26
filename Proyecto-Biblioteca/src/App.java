@@ -14,8 +14,8 @@ public class App {
         Bibliotecario bibliotecario2 = new Bibliotecario("Aleja", "110", "750232", "aleja@gmail.com", 800000, 2022, 10, 25);
         biblioteca.agregarBibliotecario(bibliotecario);
         biblioteca.agregarBibliotecario(bibliotecario2);
-        Estudiante estudiante = new Estudiante("Veronica", "1036000000", "3165000000", "vero@gmail.com", true);
-        Estudiante estudiante2 = new Estudiante("Marco", "2455500", "3156709900", "marco@gmail.com", true);
+        Estudiante estudiante = new Estudiante("Veronica", "1036000000", "3165000000", "vero@gmail.com", EstadoEstudiante.ACTIVO);
+        Estudiante estudiante2 = new Estudiante("Marco", "2455500", "3156709900", "marco@gmail.com", EstadoEstudiante.ACTIVO);
         biblioteca.agregarEstudiante(estudiante);
         biblioteca.agregarEstudiante(estudiante2);
         Prestamo prestamo = new Prestamo("1", bibliotecario, estudiante, 2024, 11, 4, 2000);

@@ -140,7 +140,7 @@ public class Biblioteca {
      * @param prestamo Prestamo que se busca agregar
      */
     public void agregarPrestamo(Prestamo prestamo){
-        if (verificarPrestamo(prestamo.getCodigo()) && prestamo.getEstudiante().getEstado() == true) {
+        if (verificarPrestamo(prestamo.getCodigo()) && prestamo.getEstudiante().getEstado().equals(EstadoEstudiante.ACTIVO)) {
             listaPrestamos.add(prestamo);
             prestamo.getBibliotecario().actualizarPrestamosBibliotecario(1);
             prestamo.getEstudiante().agregarPrestamo(prestamo);
