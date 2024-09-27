@@ -8,6 +8,7 @@ public class DetallePrestamo {
      * Metodo constructor de la clase DetallePrestamo
      * @param cantidad Cantidad de libros del detalle de pretasmo a crear
      * @param libro Libro del detalle de pretasmo a crear
+     * @param prestamo Prestamo al cual pertenece el detalle de prestamo
      */
     public DetallePrestamo(int cantidad, Libro libro, Prestamo prestamo) {
         this.cantidad = cantidad;

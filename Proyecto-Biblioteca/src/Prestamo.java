@@ -65,8 +65,12 @@ public class Prestamo {
     public void agregarDetallePrestamo(DetallePrestamo detallePrestamo){
         Libro libro = detallePrestamo.getLibro();
         int cantidad = detallePrestamo.getCantidad();
-        listaDetallePrestamos.add(detallePrestamo);
-        libro.disminuirDisponibles(cantidad);
+        String codigoTemporal = detallePrestamo.getPrestamo().getCodigo();
+        if (verificarDetallePrestamo(cantidad, libro.getUnidadesDisponibles(), codigoTemporal)) {
+            listaDetallePrestamos.add(detallePrestamo);
+            libro.disminuirDisponibles(cantidad);
+        }
+        
     }
     /**
      * Metodo para verificar que el detalle de prestamo no supere la cantidad disponible
@@ -74,9 +78,9 @@ public class Prestamo {
      * @param libro Libro del detalle de prestamo
      * @return Decision sobre si se puede añadir o no
      */
-    public boolean verificarDetallePrestamo(int cantidad, Libro libro){
+    public boolean verificarDetallePrestamo(int cantidad, int unidadesDisponibles, String codigoTemporal){
         boolean decision = true;
-        if (cantidad > libro.getUnidadesDisponibles() ) {
+        if (cantidad > unidadesDisponibles || codigoTemporal.equals(codigo)) {
             decision = false;
         }
         return decision;

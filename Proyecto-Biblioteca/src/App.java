@@ -23,7 +23,7 @@ public class App {
         biblioteca.agregarPrestamo(prestamo);
         biblioteca.agregarPrestamo(prestamo2);
         DetallePrestamo detallePrestamo = new DetallePrestamo(1, libro, prestamo);
-        DetallePrestamo detallePrestamo2 = new DetallePrestamo(1, libro, prestamo);
+        DetallePrestamo detallePrestamo2 = new DetallePrestamo(1, libro, prestamo2);
         DetallePrestamo detallePrestamo3 = new DetallePrestamo(2, libro2, prestamo2);
         DetallePrestamo detallePrestamo4 = new DetallePrestamo(3, libro2, prestamo2);
         prestamo.agregarDetallePrestamo(detallePrestamo);
