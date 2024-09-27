@@ -30,7 +30,7 @@ public class App {
         prestamo.agregarDetallePrestamo(detallePrestamo2);
         prestamo2.agregarDetallePrestamo(detallePrestamo3);
         prestamo2.agregarDetallePrestamo(detallePrestamo4);
-        //biblioteca.entregarPrestamo("1", 2024, 11, 5);
+        biblioteca.entregarPrestamo("1", 2024, 11, 5);
         //biblioteca.entregarPrestamo("2", 2024, 11, 5);
         //System.out.println(biblioteca.calcularSalariosPagar(2024, 11, 5))
         //biblioteca.reemplazarLibro(libro2, libro3);

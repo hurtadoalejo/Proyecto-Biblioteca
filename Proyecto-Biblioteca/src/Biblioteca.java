@@ -171,6 +171,7 @@ public class Biblioteca {
                 prestamoTemporal.getBibliotecario().actualizarPrestamosBibliotecario(-1);
                 prestamoTemporal.getBibliotecario().eliminarPrestamo(codigo);
                 prestamoTemporal.getEstudiante().eliminarPrestamo(codigo);
+                disminuirDineroRecaudado(prestamoTemporal.getTotalPrestamo(), prestamoTemporal.getEstadoPrestamo());
                 prestamoTemporal.eliminarDetallesPrestamos();
                 listaPrestamos.remove(prestamoTemporal);
                 break;
@@ -188,12 +189,12 @@ public class Biblioteca {
     public void entregarPrestamo(String codigo, int year, int month, int day){
         LocalDate fechaEntrega = LocalDate.of(year, month, day);
         for(Prestamo prestamoTemporal: listaPrestamos){
-            if (prestamoTemporal.getCodigo().equals(codigo)) {
+            if (prestamoTemporal.getCodigo().equals(codigo) && prestamoTemporal.getEstadoPrestamo().equals(EstadoPrestamo.PENDIENTE)) {
                 prestamoTemporal.setFechaEntrega(fechaEntrega);
                 prestamoTemporal.actualizarLibrosDisponibles();
                 prestamoTemporal.calcularCostoPrestamo(fechaEntrega);
                 prestamoTemporal.getBibliotecario().aumentarDineroExtra(prestamoTemporal.getTotalPrestamo()*0.20);
-                aumentarDineroRecaudado(prestamoTemporal.getTotalPrestamo());
+                aumentarDineroRecaudado(prestamoTemporal.getTotalPrestamo(), prestamoTemporal.getEstadoPrestamo());
                 mostrarPrecioPrestamo(prestamoTemporal.getTotalPrestamo());
                 prestamoTemporal.setEstadoPrestamo(EstadoPrestamo.PAGADO);
                 break;
@@ -201,11 +202,22 @@ public class Biblioteca {
         }
     }
     /**
-     * Metodo para adicionar el total a pagar de un prestamo a el dinero recaudado de la biblioteca
-     * @param totalPagar Total a pagar de un prestamo
+     * Metodo para aumentar el dinero recaudado de la biblioteca
+     * @param ganancia Dinero a aumentar en el dinero recaudado
      */
-    public void aumentarDineroRecaudado(double totalPagar){
-        dineroRecaudado += totalPagar;
+    public void aumentarDineroRecaudado(double ganancia, EstadoPrestamo estadoPrestamo){
+        if (estadoPrestamo.equals(EstadoPrestamo.PENDIENTE)) {
+            dineroRecaudado += ganancia;
+        }  
+    }
+    /**
+     * Metodo para disminuir el dinero recaudado de la biblioteca
+     * @param disminuir Dinero a disminuir en el dinero recaudado
+     */
+    public void disminuirDineroRecaudado(double disminuir, EstadoPrestamo estadoPrestamo){
+        if (estadoPrestamo.equals(EstadoPrestamo.PAGADO)) {
+            dineroRecaudado += (disminuir*-1);
+        }  
     }
     /**
      * Metodo para mostrar el total a pagar del prestamo
