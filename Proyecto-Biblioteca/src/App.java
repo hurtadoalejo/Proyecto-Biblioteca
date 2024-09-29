@@ -10,8 +10,8 @@ public class App {
         Libro libro3 = new Libro("3", "78999", autor2, "Margaritas", editorial2, 2011, 5, 7, 4);
         biblioteca.agregarLibro(libro);
         biblioteca.agregarLibro(libro2);
-        Bibliotecario bibliotecario = new Bibliotecario("Alejo", "100", "750254", "alejo@gmail.com", 1200000, 2023, 10, 25);
-        Bibliotecario bibliotecario2 = new Bibliotecario("Aleja", "110", "750232", "aleja@gmail.com", 800000, 2022, 10, 25);
+        Bibliotecario bibliotecario = new Bibliotecario("Alejo", "100", "750254", "alejo@gmail.com", 0, 2023, 10, 25);
+        Bibliotecario bibliotecario2 = new Bibliotecario("Aleja", "110", "750232", "aleja@gmail.com", 0, 2022, 10, 25);
         biblioteca.agregarBibliotecario(bibliotecario);
         biblioteca.agregarBibliotecario(bibliotecario2);
         Estudiante estudiante = new Estudiante("Veronica", "1036000000", "3165000000", "vero@gmail.com", EstadoEstudiante.ACTIVO);
@@ -23,16 +23,16 @@ public class App {
         biblioteca.agregarPrestamo(prestamo);
         biblioteca.agregarPrestamo(prestamo2);
         DetallePrestamo detallePrestamo = new DetallePrestamo(1, libro, prestamo);
-        DetallePrestamo detallePrestamo2 = new DetallePrestamo(1, libro, prestamo2);
+        DetallePrestamo detallePrestamo2 = new DetallePrestamo(4, libro, prestamo2);
         DetallePrestamo detallePrestamo3 = new DetallePrestamo(2, libro2, prestamo2);
         DetallePrestamo detallePrestamo4 = new DetallePrestamo(3, libro2, prestamo2);
         prestamo.agregarDetallePrestamo(detallePrestamo);
         prestamo.agregarDetallePrestamo(detallePrestamo2);
         prestamo2.agregarDetallePrestamo(detallePrestamo3);
         prestamo2.agregarDetallePrestamo(detallePrestamo4);
-        biblioteca.entregarPrestamo("1", 2024, 11, 5);
-        //biblioteca.entregarPrestamo("2", 2024, 11, 5);
-        //System.out.println(biblioteca.calcularSalariosPagar(2024, 11, 5))
+        System.out.println(prestamo.getListaDetallePrestamos());
+        //biblioteca.entregarPrestamo("1", 2024, 11, 5);
+        //System.out.println(biblioteca.calcularSalariosPagar(2024, 11, 5));
         //biblioteca.reemplazarLibro(libro2, libro3);
         //prestamo.eliminarDetallePrestamo(detallePrestamo);
         //biblioteca.eliminarPrestamo("1");  

@@ -76,11 +76,12 @@ public class Prestamo {
      * Metodo para verificar que el detalle de prestamo no supere la cantidad disponible
      * @param cantidad Cantidad del detalle de prestamo
      * @param libro Libro del detalle de prestamo
+     * @param codigoTemporal Codigo del prestamo al cual está vinculado el detalle de prestamo
      * @return Decision sobre si se puede añadir o no
      */
     public boolean verificarDetallePrestamo(int cantidad, int unidadesDisponibles, String codigoTemporal){
         boolean decision = true;
-        if (cantidad > unidadesDisponibles || codigoTemporal.equals(codigo)) {
+        if (cantidad > unidadesDisponibles || !codigoTemporal.equals(codigo)) {
             decision = false;
         }
         return decision;
